@@ -29,6 +29,28 @@
         nav a.logo { flex-grow: 1; }
         .back-link { color: var(--text-main); font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 8px; }
         .back-link:hover { color: var(--primary); }
+
+        /* --- AJUSTE MOBILE (CORREÇÃO DE QUEBRA) --- */
+        @media (max-width: 600px) {
+            /* Diminui um pouco a logo para dar espaço */
+            .logo-img {
+                height: 30px !important; 
+            }
+            
+            /* Truque para mudar o texto no mobile */
+            .back-link {
+                font-size: 0; /* Esconde o texto "Voltar ao Início" */
+            }
+            .back-link i {
+                font-size: 1.2rem; /* Mantém o ícone da seta visível */
+                display: block;
+            }
+            .back-link::after {
+                content: 'Voltar'; /* Escreve um texto novo e curto */
+                font-size: 0.95rem;
+                margin-left: 5px;
+            }
+        }
     </style>
 </head>
 <body>
