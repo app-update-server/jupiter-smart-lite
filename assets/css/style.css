@@ -154,6 +154,25 @@ nav {
     gap: 20px;
 }
 
+/* Estilo da Imagem da Logo */
+.logo-img {
+    height: 40px;      /* Altura padrão (Desktop) */
+    width: auto;       /* Largura automática para não distorcer */
+    display: block;    /* Remove espaços fantasmas */
+}
+
+/* Ajuste de Segurança para Celular (Mobile) */
+@media(max-width: 480px) {
+    .logo-img {
+        height: 32px;      /* Diminui um pouco no celular */
+        max-width: 180px;  /* Trava a largura máxima */
+        object-fit: contain; /* Garante que a imagem caiba nesse espaço */
+    }
+    
+    /* Ajuste fino no espaçamento do cabeçalho mobile */
+    nav { gap: 10px; }
+}
+
 /* Menu Desktop */
 .menu {
     display: flex;
