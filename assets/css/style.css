@@ -450,3 +450,28 @@ footer {
     .price-card { padding: 30px 20px; }
     .price-tag { font-size: 3rem; }
 }
+
+/* CORREÇÃO DA IMAGEM HERO V2 */
+.hero img {
+    width: 100%;           /* Tenta ocupar a largura */
+    max-width: 900px;      /* Trava em um tamanho bom para PC */
+    height: auto;          /* Altura proporcional */
+    display: block;
+    margin: 0 auto;        /* Centraliza */
+    border-radius: 12px;   /* Arredonda a imagem */
+    /* Removemos o max-height fixo que causava o buraco branco */
+}
+
+/* Ajuste do Container da Imagem (A caixa em volta) */
+.hero > .container > div { 
+    /* Removemos bordas e sombras do container para focar na imagem */
+    box-shadow: none !important; 
+    border: none !important;
+    background: transparent !important;
+}
+
+/* Sombra aplicada direto na imagem para ficar bonito */
+.hero img {
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    border: 1px solid #e2e8f0;
+}
