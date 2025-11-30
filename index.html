@@ -6,82 +6,150 @@
     <title>Júpiter Smart Lite - Controle Financeiro Solidário</title>
     <meta name="description" content="Organize suas finanças e ajude a AMPARA Animal. Software Offline para Windows com Simulador de CDB e Controle de Parcelas.">
     <meta name="google-site-verification" content="xLP-_yt5WfBRMGnHOQiUBEKPDN13bMjtq71ZgED2qfE" />
-	
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* --- RESET E VARIÁVEIS --- */
+        /* --- SISTEMA DE CORES (VARIÁVEIS) --- */
         :root {
-            --primary: #2563eb; /* Azul Tech */
-            --accent: #f97316; /* Laranja (Causa/Destaque) */
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --text: #334155;
+            /* Cores Fixas */
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --accent: #f97316;
+            
+            /* Modo Claro (Padrão) */
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-header: #ffffff;
+            --text-main: #334155;
+            --text-title: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --hero-bg: linear-gradient(180deg, #f0f9ff 0%, #fff 100%);
+            --cause-bg: #fff7ed;
+            --cause-border: #ffedd5;
+            --faq-bg: #f8fafc;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        body { color: var(--text); line-height: 1.6; background-color: #fff; }
+
+        /* Modo Escuro (Dark Mode) */
+        body.dark-mode {
+            --bg-body: #0f172a; /* Slate 900 */
+            --bg-card: #1e293b; /* Slate 800 */
+            --bg-header: #0f172a;
+            --text-main: #cbd5e1; /* Slate 300 */
+            --text-title: #f8fafc; /* Slate 50 */
+            --text-muted: #94a3b8;
+            --border: #334155;
+            --hero-bg: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            --cause-bg: #1e293b; /* Slate 800 */
+            --cause-border: #334155;
+            --faq-bg: #1e293b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+        
+        body { color: var(--text-main); line-height: 1.6; background-color: var(--bg-body); }
         img { max-width: 100%; display: block; }
         
         /* --- UTILITÁRIOS --- */
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
         .text-center { text-align: center; }
         .highlight { color: var(--accent); }
+        
         .btn { display: inline-block; padding: 15px 35px; border-radius: 50px; font-weight: 800; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.2s, box-shadow 0.2s; border: none; cursor: pointer; }
+        
         .btn-cta { background: var(--accent); color: white; box-shadow: 0 10px 25px rgba(249, 115, 22, 0.4); font-size: 1.1rem; }
         .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(249, 115, 22, 0.5); background-color: #ea580c; }
+        
+        .btn-primary { background-color: var(--primary); color: white; border-bottom: 4px solid #1e40af; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .btn-primary:hover { transform: translateY(-2px); background-color: var(--primary-hover); }
+
         .badge { background: #eff6ff; color: var(--primary); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; display: inline-block; margin-bottom: 15px; border: 1px solid #bfdbfe; }
+        body.dark-mode .badge { background: #1e3a8a; color: #bfdbfe; border-color: #2563eb; }
 
         /* --- HEADER / NAV --- */
-        header { background: #fff; padding: 20px 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        header { background: var(--bg-header); padding: 20px 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: 800; color: var(--dark); text-decoration: none; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--text-title); text-decoration: none; }
         .logo span { color: var(--primary); }
-        .menu { display: flex; gap: 20px; list-style: none; }
-        .menu a { text-decoration: none; color: var(--text); font-weight: 600; font-size: 0.9rem; transition: color 0.2s; }
+        .menu { display: flex; gap: 20px; list-style: none; align-items: center; }
+        .menu a { text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 0.9rem; transition: color 0.2s; }
         .menu a:hover { color: var(--primary); }
+
+        /* Theme Toggle Button */
+        .theme-btn { background: none; border: none; color: var(--text-title); font-size: 1.2rem; cursor: pointer; padding: 5px; }
+        .theme-btn:hover { color: var(--primary); }
+
         @media(max-width: 768px) { .menu { display: none; } }
+        
+        /* Menu Mobile Toggle (Visível só no mobile) */
+        .theme-btn-mobile { display: none; font-size: 1.5rem; color: var(--text-title); background: none; border: none; cursor: pointer; }
+        @media(max-width: 768px) { .theme-btn-mobile { display: block; } nav { gap: 15px; } }
+
 
         /* --- HERO SECTION --- */
-        .hero { padding: 160px 0 80px; background: linear-gradient(180deg, #f0f9ff 0%, #fff 100%); text-align: center; }
-        .hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; color: var(--dark); }
-        .hero p { font-size: 1.25rem; color: #64748b; max-width: 700px; margin: 0 auto 40px; }
+        .hero { padding: 160px 0 80px; background: var(--hero-bg); text-align: center; }
+        .hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; color: var(--text-title); }
+        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 40px; }
         
         /* --- CAUSA SOCIAL --- */
-        .cause-section { background: #fff7ed; padding: 60px 0; border-top: 1px solid #ffedd5; border-bottom: 1px solid #ffedd5; }
+        .cause-section { background: var(--cause-bg); padding: 60px 0; border-top: 1px solid var(--cause-border); border-bottom: 1px solid var(--cause-border); }
         .cause-box { display: flex; align-items: center; gap: 40px; max-width: 900px; margin: 0 auto; }
-        .cause-content h2 { color: #9a3412; font-size: 2rem; margin-bottom: 15px; }
-        .cause-icon { font-size: 4rem; background: white; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 15px rgba(249, 115, 22, 0.2); }
+        .cause-content h2 { color: var(--accent); font-size: 2rem; margin-bottom: 15px; }
+        .cause-icon { font-size: 4rem; background: var(--bg-card); width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 15px rgba(249, 115, 22, 0.2); color: var(--accent); }
 
         /* --- FEATURES --- */
         .features { padding: 100px 0; }
-        .features h2 { text-align: center; font-size: 2.5rem; margin-bottom: 60px; color: var(--dark); }
+        .features h2 { text-align: center; font-size: 2.5rem; margin-bottom: 60px; color: var(--text-title); }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
-        .feature-card { background: #fff; padding: 30px; border-radius: 16px; border: 1px solid #e2e8f0; transition: transform 0.3s; }
+        .feature-card { background: var(--bg-card); padding: 30px; border-radius: 16px; border: 1px solid var(--border); transition: transform 0.3s; }
         .feature-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1); }
         .feature-icon { font-size: 2.5rem; margin-bottom: 20px; display: block; color: var(--primary); }
-        .feature-card h3 { margin-bottom: 10px; color: var(--dark); }
+        .feature-card h3 { margin-bottom: 10px; color: var(--text-title); }
 
         /* --- PRICE --- */
-        .price-section { background: var(--dark); color: white; padding: 80px 0; text-align: center; }
-        .price-card { background: white; color: var(--text); max-width: 500px; margin: 0 auto; padding: 50px; border-radius: 20px; position: relative; }
+        .price-section { background: #0f172a; color: white; padding: 80px 0; text-align: center; } /* Mantém escuro sempre para destaque */
+        .price-card { background: white; color: #334155; max-width: 500px; margin: 0 auto; padding: 50px; border-radius: 20px; position: relative; }
+        body.dark-mode .price-card { background: #1e293b; color: #cbd5e1; }
         .price-tag { font-size: 3.5rem; font-weight: 800; color: var(--primary); }
-        .price-tag span { font-size: 1rem; color: #94a3b8; font-weight: 400; }
-        .old-price { text-decoration: line-through; color: #94a3b8; font-size: 1.2rem; }
+        .price-tag span { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+        .old-price { text-decoration: line-through; color: var(--text-muted); font-size: 1.2rem; }
         
         /* --- FAQ --- */
         .faq { padding: 80px 0; max-width: 800px; margin: 0 auto; }
-        .faq h2 { text-align: center; margin-bottom: 40px; font-size: 2rem; }
-        details { background: #f8fafc; border-radius: 8px; padding: 15px; margin-bottom: 15px; cursor: pointer; border: 1px solid #e2e8f0; }
-        summary { font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+        .faq h2 { text-align: center; margin-bottom: 40px; font-size: 2rem; color: var(--text-title); }
+        details { background: var(--faq-bg); border-radius: 8px; padding: 15px; margin-bottom: 15px; cursor: pointer; border: 1px solid var(--border); }
+        summary { font-weight: 600; list-style: none; display: flex; justify-content: space-between; align-items: center; color: var(--text-title); }
         summary::after { content: '+'; font-size: 1.5rem; color: var(--primary); }
         details[open] summary::after { content: '-'; }
-        details p { margin-top: 15px; color: #475569; }
+        details p { margin-top: 15px; color: var(--text-muted); }
 
         /* --- FOOTER --- */
-        footer { background: #fff; padding: 40px 0; text-align: center; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 0.9rem; }
+        footer { background: var(--bg-card); padding: 40px 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; }
+
+        /* --- VOLTAR AO TOPO --- */
+        #backToTop {
+            display: none; /* Hidden by default */
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            border: none;
+            outline: none;
+            background-color: var(--primary);
+            color: white;
+            cursor: pointer;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 18px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: opacity 0.4s, transform 0.3s;
+            opacity: 0;
+        }
+        #backToTop:hover { background-color: var(--primary-hover); transform: translateY(-5px); }
+        #backToTop.visible { display: block; opacity: 1; }
 
         /* Responsividade */
         @media(max-width: 768px) {
@@ -96,12 +164,18 @@
         <div class="container">
             <nav>
                 <a href="#" class="logo">Júpiter<span>Smart</span> Lite</a>
-                <ul class="menu">
-                    <li><a href="#causa">A Causa</a></li>
-                    <li><a href="#recursos">Recursos</a></li>
-                    <li><a href="#faq">Dúvidas</a></li>
-                    <li><a href="#comprar" class="highlight">Baixar Agora</a></li>
-                </ul>
+                
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <ul class="menu">
+                        <li><a href="#causa">A Causa</a></li>
+                        <li><a href="#recursos">Recursos</a></li>
+                        <li><a href="#faq">Dúvidas</a></li>
+                        <li><a href="#comprar" class="highlight">Baixar Agora</a></li>
+                    </ul>
+                    <button class="theme-btn" id="theme-toggle" title="Alternar Tema">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
             </nav>
         </div>
     </header>
@@ -113,9 +187,9 @@
             <p>O primeiro controle financeiro 100% Offline onde seu investimento simbólico se transforma em doação real para a <strong>AMPARA Animal</strong>.</p>
             
             <a href="#comprar" class="btn btn-cta">QUERO AJUDAR E ME ORGANIZAR</a>
-            <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8;">🔒 Licença Vitalícia • Pagamento Único</p>
+            <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8; color: var(--text-muted);">🔒 Licença Vitalícia • Pagamento Único</p>
             
-            <div style="margin-top: 50px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0;">
+            <div style="margin-top: 50px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); border-radius: 12px; overflow: hidden; border: 1px solid var(--border);">
                 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgA6aRMwXPnFATTepqKl0WHk0B_DKUnu_xowvc-pLtaStMQLtINhe-QKgkGvSUxB6nN-VNW1dUyQrQ3c58buMdJgRyJmvgpki6Z1VOSB-iG7kAg6Z_jhmytc5lc0nyq1Z0c40x4ErtX34M31zn_-pNnoMY2-qpZo_HPJ-eRpS5QtarFiGaJq7YGFg8E25l6/s1600-rw/controle-financeiro-jupiter-lite.webp" alt="Interface do Software Júpiter Smart Lite - Controle Financeiro Windows" width="100%">
             </div>
         </div>
@@ -128,7 +202,7 @@
                 <div class="cause-content">
                     <h2>Lucro Social: Tecnologia do Bem</h2>
                     <p>Este não é apenas um software. Ao adquirir sua licença hoje, você entra em um ciclo virtuoso. Parte do valor remunera os parceiros que divulgam o projeto e <strong>100% do lucro do desenvolvedor</strong> é doado automaticamente para a AMPARA Animal via Hotmart One.</p>
-                    <p style="margin-top: 10px; font-weight: 600;">Você organiza seu bolso e ajuda a financiar ração, remédios e abrigo.</p>
+                    <p style="margin-top: 10px; font-weight: 600; color: var(--text-title);">Você organiza seu bolso e ajuda a financiar ração, remédios e abrigo.</p>
                 </div>
             </div>
         </div>
@@ -179,24 +253,24 @@
 
     <section id="comprar" class="price-section">
         <div class="container">
-            <h2 style="margin-bottom: 10px;">Faça parte da corrente do bem</h2>
-            <p style="opacity: 0.8; margin-bottom: 40px;">Garanta organização financeira vitalícia pelo preço de um lanche.</p>
+            <h2 style="margin-bottom: 10px; color: #fff;">Faça parte da corrente do bem</h2>
+            <p style="opacity: 0.8; margin-bottom: 40px; color: #fff;">Garanta organização financeira vitalícia pelo preço de um lanche.</p>
             
             <div class="price-card">
                 <p class="old-price">De R$ 39,90</p>
                 <div class="price-tag">R$ 19,90 <span>/ único</span></div>
-                <p style="margin: 20px 0; color: #64748b;">Acesso Vitalício + Atualizações</p>
+                <p style="margin: 20px 0; color: var(--text-muted);">Acesso Vitalício + Atualizações</p>
                 
-                <ul style="text-align: left; margin-bottom: 30px; list-style: none;">
+                <ul style="text-align: left; margin-bottom: 30px; list-style: none; color: var(--text-main);">
                     <li style="margin-bottom: 10px;">✅ Software Completo (Windows)</li>
                     <li style="margin-bottom: 10px;">✅ Sem mensalidades</li>
                     <li style="margin-bottom: 10px;">✅ Contribuição Social Inclusa</li>
                     <li style="margin-bottom: 10px;">✅ Garantia de 7 dias</li>
                 </ul>
 
-                <a href="https://pay.hotmart.com/P101723942H?checkoutMode=10" rel="noopener" target="_blank" class="btn btn-cta" style="width: 100%;">COMPRAR AGORA</a>
+                <a href="SEU_LINK_DE_CHECKOUT_AQUI" rel="noopener" target="_blank" class="btn btn-cta" style="width: 100%;">COMPRAR AGORA</a>
                 
-                <p style="font-size: 0.8rem; margin-top: 15px; color: #94a3b8;">Compra segura via Hotmart</p>
+                <p style="font-size: 0.8rem; margin-top: 15px; color: var(--text-muted);">Compra segura via Hotmart</p>
             </div>
         </div>
     </section>
@@ -204,22 +278,18 @@
     <section id="faq" class="faq">
         <div class="container">
             <h2>Perguntas Frequentes</h2>
-            
             <details>
                 <summary>Funciona sem internet?</summary>
                 <p>Sim! O Júpiter Smart Lite é 100% offline. Ele é instalado no seu Windows e seus dados ficam salvos localmente. A internet só é necessária se você usar o Simulador de CDB (para buscar a taxa atual) ou baixar atualizações.</p>
             </details>
-
             <details>
                 <summary>É pagamento único ou mensalidade?</summary>
                 <p>Pagamento único. Você paga R$ 19,90 uma vez e usa para sempre. Não existem cobranças recorrentes nesta versão.</p>
             </details>
-
             <details>
                 <summary>Como funciona a doação?</summary>
                 <p>O produto está cadastrado no programa Hotmart One. A plataforma divide o valor automaticamente: paga os impostos, a comissão dos afiliados parceiros e o lucro restante (que seria do desenvolvedor) vai direto para a conta da AMPARA Animal.</p>
             </details>
-
             <details>
                 <summary>Funciona em Mac ou Celular?</summary>
                 <p>Não. Esta versão foi desenvolvida exclusivamente para computadores com Windows 10 ou 11 para garantir a máxima performance e segurança de dados.</p>
@@ -233,6 +303,57 @@
             <p style="margin-top: 10px; font-size: 0.8rem;">Este site não é afiliado ao Facebook ou Google. Produto comercializado via Hotmart.</p>
         </div>
     </footer>
+
+    <button id="backToTop" title="Voltar ao Topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // --- LÓGICA DO MODO ESCURO ---
+        const toggleBtn = document.getElementById('theme-toggle');
+        const body = document.body;
+        const icon = toggleBtn.querySelector('i');
+
+        // 1. Verifica preferência salva
+        if (localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark-mode');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+
+        // 2. Função de Alternar
+        toggleBtn.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                localStorage.setItem('theme', 'light');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+
+        // --- LÓGICA DO BOTÃO VOLTAR AO TOPO ---
+        const backToTopBtn = document.getElementById('backToTop');
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                backToTopBtn.classList.add("visible");
+            } else {
+                backToTopBtn.classList.remove("visible");
+            }
+        };
+
+        backToTopBtn.addEventListener("click", function() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
 
 </body>
 </html>
