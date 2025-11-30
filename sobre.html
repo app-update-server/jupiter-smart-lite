@@ -27,7 +27,7 @@
             --glass-border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Layout Mestre (Fixa o Rodapé) */
+        /* Layout Mestre */
         body {
             display: flex;
             flex-direction: column;
@@ -43,7 +43,7 @@
             padding: 100px 0 60px;
         }
 
-        /* BENTO GRID (O Segredo do Design) */
+        /* BENTO GRID */
         .bento-grid {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr 0.8fr; /* Perfil | Prod 1 | Prod 2 */
@@ -67,10 +67,10 @@
         }
         .bento-card:hover { transform: translateY(-5px); }
 
-        /* --- 1. CARD PERFIL (Esquerda - Grande) --- */
+        /* --- 1. CARD PERFIL (Esquerda) --- */
         .card-profile {
             grid-column: span 1;
-            grid-row: span 2; /* Ocupa toda altura */
+            grid-row: span 2;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
@@ -127,10 +127,11 @@
         .price-val { font-size: 1.2rem; font-weight: 800; color: var(--text-title); }
         .price-inst { font-size: 0.8rem; color: var(--text-muted); }
 
+        /* --- BOTÕES DE COMPRA (CORRIGIDO) --- */
         .btn-shop {
             margin-top: 15px;
-            background: var(--text-title); /* Botão Escuro Elegante */
-            color: white;
+            background-color: #1e293b; /* Sempre escuro no modo claro */
+            color: #ffffff !important; /* Texto sempre branco */
             text-align: center;
             padding: 12px;
             border-radius: 8px;
@@ -138,17 +139,30 @@
             text-decoration: none;
             transition: 0.2s;
             display: flex; align-items: center; justify-content: center; gap: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        .btn-shop:hover { background: var(--brand-blue); }
+        .btn-shop:hover { 
+            background-color: var(--brand-blue); 
+            transform: translateY(-2px);
+        }
+
+        /* CORREÇÃO ESPECÍFICA PARA DARK MODE */
+        body.dark-mode .btn-shop {
+            background-color: var(--brand-blue); /* Azul brilhante no fundo escuro */
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+        }
+        body.dark-mode .btn-shop:hover {
+            background-color: #60a5fa; /* Azul mais claro */
+        }
 
         /* Cores Específicas */
         .rec-vendas .prod-icon { color: var(--brand-blue); }
-        .jupiter-pro .prod-icon { color: #8b5cf6; } /* Roxo */
+        .jupiter-pro .prod-icon { color: #8b5cf6; }
 
         /* --- RESPONSIVIDADE --- */
         @media (max-width: 1000px) {
             .bento-grid {
-                grid-template-columns: 1fr 1fr; /* 2 Colunas */
+                grid-template-columns: 1fr 1fr; 
                 grid-template-rows: auto;
             }
             .card-profile { grid-column: span 2; flex-direction: row; align-items: center; }
@@ -156,7 +170,7 @@
 
         @media (max-width: 768px) {
             .page-wrapper { padding-top: 90px; }
-            .bento-grid { grid-template-columns: 1fr; gap: 15px; } /* 1 Coluna */
+            .bento-grid { grid-template-columns: 1fr; gap: 15px; }
             .card-profile { grid-column: span 1; flex-direction: column; text-align: center; }
             .profile-header { flex-direction: column; gap: 10px; }
             .bio-quote { text-align: left; }
@@ -173,7 +187,9 @@
                 </a>
                 <div class="nav-right" style="display: flex; align-items: center; gap: 15px;">
                     <button class="theme-btn" id="theme-toggle"><i class="fas fa-moon"></i></button>
-                    <a href="./index.html" class="back-link"><i class="fas fa-arrow-left"></i> Voltar</a>
+                    <a href="./index.html" class="back-link" style="color: var(--text-main); font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </a>
                 </div>
             </nav>
         </div>
@@ -210,7 +226,7 @@
                         <span class="price-val">R$ 89,90</span>
                     </div>
                     <a href="https://lp.faroinvestidor.com.br/" target="_blank" class="btn-shop">
-                        Conhecer PRO <i class="fas fa-arrow-right"></i>
+                        Conhecer Versão PRO
                     </a>
                 </div>
             </div>
@@ -227,7 +243,7 @@
                         <span class="price-val">R$ 89,90</span>
                     </div>
                     <a href="https://recvendas.textospropagandas.com.br/" target="_blank" class="btn-shop">
-                        Conhecer Hub <i class="fas fa-arrow-right"></i>
+                        Conhecer o Hub
                     </a>
                 </div>
             </div>
