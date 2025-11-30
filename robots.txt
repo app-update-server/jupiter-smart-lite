@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://app-update-server.github.io/jupiter-smart-lite/sitemap.xml
