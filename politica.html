@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Privacidade - Júpiter Smart Lite</title>
-    <meta name="robots" content="noindex"> <link rel="icon" href="assets/img/favicon.png" type="image/png">
+    <title>Política de Privacidade e Termos - Júpiter Smart Lite</title>
+    <meta name="robots" content="noindex">
+
+    <link rel="icon" href="assets/img/favicon.png" type="image/png">
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 
     <style>
-        /* Estilos Específicos desta página */
         .policy-container { max-width: 800px; margin: 120px auto 60px; padding: 0 20px; }
         .policy-header { text-align: center; margin-bottom: 50px; }
         .policy-header h1 { font-size: 2.5rem; color: var(--text-title); margin-bottom: 10px; }
@@ -23,9 +24,8 @@
         .policy-content li { margin-bottom: 8px; color: var(--text-main); }
         
         .highlight-box { background: #eff6ff; border-left: 4px solid var(--primary); padding: 20px; border-radius: 4px; margin: 30px 0; }
-        .highlight-box strong { color: var(--primary); }
-
-        /* Ajuste do menu para esta página */
+        
+        .nav-actions { display: none !important; } /* Esconde botões do menu nesta página para limpar visual */
         nav a.logo { flex-grow: 1; }
         .back-link { color: var(--text-main); font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 8px; }
         .back-link:hover { color: var(--primary); }
@@ -46,8 +46,8 @@
 
     <div class="policy-container">
         <div class="policy-header">
-            <h1>Privacidade e Segurança</h1>
-            <p>Transparência total sobre como tratamos (ou não tratamos) seus dados.</p>
+            <h1>Privacidade e Termos de Uso</h1>
+            <p>Transparência total sobre dados, licença e regras.</p>
         </div>
 
         <div class="policy-content">
@@ -56,36 +56,57 @@
             </div>
 
             <h2>1. Coleta de Dados</h2>
-            <p>A filosofia do nosso software é "Privacy First" (Privacidade Primeiro). Diferente de aplicativos bancários ou sistemas na nuvem, nossa arquitetura é local.</p>
+            <p>A filosofia do nosso software é "Privacy First". Diferente de aplicativos bancários ou sistemas na nuvem, nossa arquitetura é local.</p>
             <ul>
-                <li><strong>Dados Financeiros:</strong> Saldos, extratos e registros digitados no aplicativo são armazenados em um banco de dados local (IndexedDB) no seu navegador/computador. Estes dados nunca são enviados para nossos servidores.</li>
-                <li><strong>Dados de Compra:</strong> Ao adquirir a licença, seus dados de pagamento (Nome, Email, CPF) são processados exclusivamente pela <strong>Hotmart</strong>. Nós recebemos apenas a confirmação da venda para liberar o acesso.</li>
+                <li><strong>Dados Financeiros:</strong> Saldos, extratos e registros ficam no banco de dados local (IndexedDB) do seu computador. Nunca são enviados para nuvem.</li>
+                <li><strong>Dados de Compra:</strong> Seus dados de pagamento são processados exclusivamente pela <strong>Hotmart</strong>. Nós recebemos apenas a confirmação para liberar a licença.</li>
             </ul>
 
             <h2>2. Uso de Cookies</h2>
-            <p>O aplicativo desktop em si não utiliza cookies de rastreamento publicitário.</p>
-            <p>No entanto, este site (Landing Page) utiliza cookies essenciais e de análise para:</p>
+            <p>O aplicativo desktop não usa cookies. O site (Landing Page) utiliza cookies essenciais para:</p>
             <ul>
-                <li>Melhorar o desempenho da página.</li>
-                <li>Rastrear a origem das vendas para remunerar corretamente os afiliados parceiros (via Hotmart).</li>
-                <li>Analisar estatísticas anônimas de visitação (Google Analytics).</li>
+                <li>Rastrear a origem das vendas para remunerar os afiliados parceiros.</li>
+                <li>Análise anônima de tráfego.</li>
             </ul>
 
             <h2>3. Compartilhamento de Dados</h2>
-            <p>Como não coletamos seus dados financeiros, é tecnicamente impossível compartilhá-los com terceiros. Seus segredos financeiros pertencem apenas a você.</p>
-            <p>Sobre a doação para a <strong>AMPARA Animal</strong>: O repasse financeiro é feito de forma empresarial baseada no volume de vendas. Seus dados pessoais não são compartilhados com a instituição, apenas o valor monetário da contribuição.</p>
+            <p>Como não coletamos seus dados financeiros, é impossível compartilhá-los. Sobre a <strong>AMPARA Animal</strong>: O repasse da doação é financeiro e empresarial. Seus dados pessoais não são expostos.</p>
 
             <h2>4. Segurança</h2>
-            <p>A segurança dos dados depende da segurança do seu próprio computador. Recomendamos:</p>
+            <p>A segurança dos dados depende do seu computador. Recomendamos:</p>
             <ul>
-                <li>Manter seu Windows atualizado.</li>
-                <li>Utilizar a função de "Backup (.json)" do aplicativo regularmente e salvar em um local seguro (pendrive ou nuvem pessoal).</li>
+                <li>Manter o Windows atualizado.</li>
+                <li>Fazer backups regulares usando a função "Exportar Backup (.json)" do sistema.</li>
             </ul>
 
-            <h2>5. Contato</h2>
-            <p>Para dúvidas sobre esta política ou suporte técnico, entre em contato através do e-mail de suporte informado na sua área de membros da Hotmart.</p>
+            <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid var(--border);">
+                <h2 style="border: none; font-size: 2rem; text-align: center; color: var(--text-title); margin-bottom: 30px;">Licença e Termos</h2>
 
-            <p style="margin-top: 50px; font-size: 0.9rem; color: #999;">Última atualização: Novembro de 2025.</p>
+                <h2>5. Licença de Uso</h2>
+                <p>Ao adquirir o software, você recebe uma <strong>Licença de Uso Vitalícia</strong> para uso pessoal.</p>
+                <ul>
+                    <li>Você <strong>pode</strong> instalar em seus computadores pessoais.</li>
+                    <li>Você <strong>NÃO pode</strong> revender, alugar, modificar ou distribuir o arquivo instalador publicamente.</li>
+                    <li>A pirataria deste software prejudica diretamente a arrecadação de fundos para a causa animal.</li>
+                </ul>
+
+                <h2>6. Política de Reembolso e Cancelamento</h2>
+                <p>Conforme o Código de Defesa do Consumidor, oferecemos garantia de 7 dias.</p>
+                <p><strong>Importante:</strong> Este é um produto digital com viés solidário. Ao solicitar o reembolso:</p>
+                <ul>
+                    <li>O valor da doação para a AMPARA Animal é estornado.</li>
+                    <li>Sua licença de uso é <strong>automaticamente revogada</strong>.</li>
+                    <li>Você deve desinstalar o software imediatamente do seu computador para evitar violação de propriedade intelectual.</li>
+                </ul>
+
+                <h2>7. Isenção de Responsabilidade</h2>
+                <p>O software é uma ferramenta de organização. Não fornecemos consultoria financeira. As simulações de CDB e investimentos são projeções matemáticas baseadas em dados de mercado que podem variar.</p>
+            </div>
+
+            <h2 style="margin-top: 50px;">8. Contato</h2>
+            <p>Para suporte técnico, utilize os canais oficiais informados na área de membros da Hotmart.</p>
+
+            <p style="margin-top: 50px; font-size: 0.9rem; color: var(--text-muted);">Última atualização: Novembro de 2025.</p>
         </div>
     </div>
 
@@ -96,7 +117,6 @@
     </footer>
 
     <script src="assets/js/script.js"></script>
-    
     <script src="assets/js/cookies.js"></script>
 
 </body>
