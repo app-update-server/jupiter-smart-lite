@@ -6,6 +6,7 @@
     <title>Júpiter Smart Lite - Controle Financeiro Solidário</title>
     <meta name="description" content="Organize suas finanças e ajude a AMPARA Animal. Software Offline para Windows com Simulador de CDB e Controle de Parcelas.">
     <meta name="google-site-verification" content="xLP-_yt5WfBRMGnHOQiUBEKPDN13bMjtq71ZgED2qfE" />
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
@@ -50,7 +51,7 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
         
-        body { color: var(--text-main); line-height: 1.6; background-color: var(--bg-body); }
+        body { color: var(--text-main); line-height: 1.6; background-color: var(--bg-body); position: relative; }
         img { max-width: 100%; display: block; }
         
         /* --- UTILITÁRIOS --- */
@@ -69,48 +70,66 @@
         .badge { background: #eff6ff; color: var(--primary); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; display: inline-block; margin-bottom: 15px; border: 1px solid #bfdbfe; }
         body.dark-mode .badge { background: #1e3a8a; color: #bfdbfe; border-color: #2563eb; }
 
-        /* --- HEADER / NAV --- */
-        header { background: var(--bg-header); padding: 20px 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        nav { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: 800; color: var(--text-title); text-decoration: none; }
+        /* --- HEADER / NAV (CORRIGIDO PARA MOBILE) --- */
+        header { background: var(--bg-header); padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        
+        nav { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        
+        .logo { font-size: 1.3rem; font-weight: 800; color: var(--text-title); text-decoration: none; }
         .logo span { color: var(--primary); }
+        
+        .nav-right { display: flex; align-items: center; gap: 20px; }
+        
         .menu { display: flex; gap: 20px; list-style: none; align-items: center; }
         .menu a { text-decoration: none; color: var(--text-main); font-weight: 600; font-size: 0.9rem; transition: color 0.2s; }
         .menu a:hover { color: var(--primary); }
 
-        /* Theme Toggle Button */
-        .theme-btn { background: none; border: none; color: var(--text-title); font-size: 1.2rem; cursor: pointer; padding: 5px; }
+        /* Botão Dark Mode */
+        .theme-btn { 
+            background: none; 
+            border: none; 
+            color: var(--text-title); 
+            font-size: 1.4rem; 
+            cursor: pointer; 
+            padding: 5px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         .theme-btn:hover { color: var(--primary); }
 
-        @media(max-width: 768px) { .menu { display: none; } }
-        
-        /* Menu Mobile Toggle (Visível só no mobile) */
-        .theme-btn-mobile { display: none; font-size: 1.5rem; color: var(--text-title); background: none; border: none; cursor: pointer; }
-        @media(max-width: 768px) { .theme-btn-mobile { display: block; } nav { gap: 15px; } }
-
+        /* AJUSTE MOBILE */
+        @media(max-width: 768px) { 
+            .menu { display: none; } /* Esconde os links de texto no celular */
+            .nav-right { gap: 10px; } /* Aproxima o botão */
+        }
 
         /* --- HERO SECTION --- */
-        .hero { padding: 160px 0 80px; background: var(--hero-bg); text-align: center; }
-        .hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; color: var(--text-title); }
-        .hero p { font-size: 1.25rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 40px; }
+        .hero { padding: 140px 0 80px; background: var(--hero-bg); text-align: center; }
+        .hero h1 { font-size: 2.8rem; line-height: 1.1; margin-bottom: 20px; color: var(--text-title); }
+        .hero p { font-size: 1.1rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 40px; }
         
         /* --- CAUSA SOCIAL --- */
         .cause-section { background: var(--cause-bg); padding: 60px 0; border-top: 1px solid var(--cause-border); border-bottom: 1px solid var(--cause-border); }
         .cause-box { display: flex; align-items: center; gap: 40px; max-width: 900px; margin: 0 auto; }
         .cause-content h2 { color: var(--accent); font-size: 2rem; margin-bottom: 15px; }
-        .cause-icon { font-size: 4rem; background: var(--bg-card); width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 15px rgba(249, 115, 22, 0.2); color: var(--accent); }
+        .cause-icon { font-size: 4rem; background: var(--bg-card); width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 0 4px 15px rgba(249, 115, 22, 0.2); color: var(--accent); flex-shrink: 0; }
 
         /* --- FEATURES --- */
-        .features { padding: 100px 0; }
-        .features h2 { text-align: center; font-size: 2.5rem; margin-bottom: 60px; color: var(--text-title); }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; }
+        .features { padding: 80px 0; }
+        .features h2 { text-align: center; font-size: 2.2rem; margin-bottom: 60px; color: var(--text-title); }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         .feature-card { background: var(--bg-card); padding: 30px; border-radius: 16px; border: 1px solid var(--border); transition: transform 0.3s; }
         .feature-card:hover { transform: translateY(-5px); border-color: var(--primary); box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1); }
         .feature-icon { font-size: 2.5rem; margin-bottom: 20px; display: block; color: var(--primary); }
         .feature-card h3 { margin-bottom: 10px; color: var(--text-title); }
 
         /* --- PRICE --- */
-        .price-section { background: #0f172a; color: white; padding: 80px 0; text-align: center; } /* Mantém escuro sempre para destaque */
+        .price-section { background: #0f172a; color: white; padding: 80px 0; text-align: center; } 
         .price-card { background: white; color: #334155; max-width: 500px; margin: 0 auto; padding: 50px; border-radius: 20px; position: relative; }
         body.dark-mode .price-card { background: #1e293b; color: #cbd5e1; }
         .price-tag { font-size: 3.5rem; font-weight: 800; color: var(--primary); }
@@ -129,32 +148,33 @@
         /* --- FOOTER --- */
         footer { background: var(--bg-card); padding: 40px 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.9rem; }
 
-        /* --- VOLTAR AO TOPO --- */
+        /* --- VOLTAR AO TOPO (CORRIGIDO PARA MOBILE) --- */
         #backToTop {
-            display: none; /* Hidden by default */
+            display: none; 
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 999;
+            bottom: 25px;
+            right: 25px;
+            z-index: 9999;
             border: none;
             outline: none;
             background-color: var(--primary);
             color: white;
             cursor: pointer;
-            padding: 15px;
+            padding: 12px 16px; /* Tamanho de toque melhor */
             border-radius: 50%;
-            font-size: 18px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             transition: opacity 0.4s, transform 0.3s;
             opacity: 0;
         }
         #backToTop:hover { background-color: var(--primary-hover); transform: translateY(-5px); }
         #backToTop.visible { display: block; opacity: 1; }
 
-        /* Responsividade */
+        /* Responsividade Geral */
         @media(max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 2.2rem; }
             .cause-box { flex-direction: column; text-align: center; gap: 20px; }
+            .price-card { padding: 30px 20px; }
         }
     </style>
 </head>
@@ -165,7 +185,7 @@
             <nav>
                 <a href="#" class="logo">Júpiter<span>Smart</span> Lite</a>
                 
-                <div style="display: flex; align-items: center; gap: 20px;">
+                <div class="nav-right">
                     <ul class="menu">
                         <li><a href="#causa">A Causa</a></li>
                         <li><a href="#recursos">Recursos</a></li>
@@ -268,7 +288,7 @@
                     <li style="margin-bottom: 10px;">✅ Garantia de 7 dias</li>
                 </ul>
 
-                <a href="SEU_LINK_DE_CHECKOUT_AQUI" rel="noopener" target="_blank" class="btn btn-cta" style="width: 100%;">COMPRAR AGORA</a>
+                <a href="https://pay.hotmart.com/P101723942H?checkoutMode=10" rel="noopener" target="_blank" class="btn btn-cta" style="width: 100%;">COMPRAR AGORA</a>
                 
                 <p style="font-size: 0.8rem; margin-top: 15px; color: var(--text-muted);">Compra segura via Hotmart</p>
             </div>
@@ -314,14 +334,13 @@
         const body = document.body;
         const icon = toggleBtn.querySelector('i');
 
-        // 1. Verifica preferência salva
+        // Verifica preferência salva
         if (localStorage.getItem('theme') === 'dark') {
             body.classList.add('dark-mode');
             icon.classList.remove('fa-moon');
             icon.classList.add('fa-sun');
         }
 
-        // 2. Função de Alternar
         toggleBtn.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
             
@@ -336,10 +355,11 @@
             }
         });
 
-        // --- LÓGICA DO BOTÃO VOLTAR AO TOPO ---
+        // --- LÓGICA DO BOTÃO VOLTAR AO TOPO (Aprimorada para Mobile) ---
         const backToTopBtn = document.getElementById('backToTop');
 
         window.onscroll = function() {
+            // Lógica dupla para garantir compatibilidade entre navegadores
             if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
                 backToTopBtn.classList.add("visible");
             } else {
