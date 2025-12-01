@@ -15,6 +15,36 @@ window.copyShareLink = function(btn) {
     }, 2000);
 };
 
+// Função Profissional de Compartilhamento (Popup)
+window.shareSocial = function(network, title, url) {
+    let shareUrl = "";
+    const width = 600;
+    const height = 400;
+    const left = (screen.width - width) / 2;
+    const top = (screen.height - height) / 2;
+    const params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=${width},height=${height},top=${top},left=${left}`;
+
+    switch(network) {
+        case 'facebook':
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+            break;
+        case 'twitter':
+            shareUrl = `https://twitter.com/intent/tweet?text=${title}&url=${url}`;
+            break;
+        case 'linkedin':
+            shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${title}`;
+            break;
+        case 'whatsapp':
+            // WhatsApp funciona melhor em nova aba, não popup
+            window.open(`https://api.whatsapp.com/send?text=${title}%20${url}`, '_blank');
+            return;
+    }
+
+    if (shareUrl) {
+        window.open(shareUrl, 'shareWindow', params);
+    }
+};
+
 document.addEventListener('DOMContentLoaded', async () => {
     // --- CONFIGURAÇÕES ---
     const ITEMS_PER_PAGE = 6; // Quantos posts por página
@@ -205,7 +235,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const pageUrl = encodeURIComponent(window.location.href);
             const postTitleEncoded = encodeURIComponent(post.title);
 
-            // Renderiza o HTML (Com Facebook, X e Correção do Copiar)
+            // Renderiza o HTML (Com Facebook, X e Popup Correto)
             postContainer.innerHTML = `
                 <div class="article-header">
                     <span class="badge">${post.category}</span>
@@ -226,21 +256,21 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div class="share-box">
                     <div class="share-title">Compartilhe este conhecimento</div>
                     <div class="share-buttons">
-                        <a href="https://api.whatsapp.com/send?text=${postTitleEncoded}%20${pageUrl}" target="_blank" class="share-btn share-wa">
+                        <button onclick="window.shareSocial('whatsapp', '${postTitleEncoded}', '${pageUrl}')" class="share-btn share-wa">
                             <i class="fab fa-whatsapp"></i> WhatsApp
-                        </a>
+                        </button>
                         
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=${pageUrl}" target="_blank" class="share-btn share-fb">
+                        <button onclick="window.shareSocial('facebook', '${postTitleEncoded}', '${pageUrl}')" class="share-btn share-fb">
                             <i class="fab fa-facebook-f"></i> Facebook
-                        </a>
+                        </button>
 
-                        <a href="https://twitter.com/intent/tweet?url=${pageUrl}&text=${postTitleEncoded}" target="_blank" class="share-btn share-x">
+                        <button onclick="window.shareSocial('twitter', '${postTitleEncoded}', '${pageUrl}')" class="share-btn share-x">
                             <i class="fab fa-x-twitter"></i> X
-                        </a>
+                        </button>
 
-                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=${pageUrl}&title=${postTitleEncoded}" target="_blank" class="share-btn share-li">
+                        <button onclick="window.shareSocial('linkedin', '${postTitleEncoded}', '${pageUrl}')" class="share-btn share-li">
                             <i class="fab fa-linkedin-in"></i> LinkedIn
-                        </a>
+                        </button>
 
                         <button onclick="window.copyShareLink(this)" class="share-btn share-copy">
                             <i class="fas fa-link"></i> Copiar Link
