@@ -1,0 +1,32 @@
+[
+  {
+    "id": "controle-financeiro-offline-seguranca",
+    "title": "Por que o Controle Financeiro Offline é a Tendência de Segurança para 2026?",
+    "date": "30 Nov 2025",
+    "author": "Wallace Fernandes",
+    "category": "Segurança & Privacidade",
+    "image": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=800&q=80",
+    "summary": "Vazamento de dados, mensalidades infinitas e dependência de internet. Descubra por que voltar para o Desktop é a escolha mais inteligente para suas finanças.",
+    "contentUrl": "assets/posts/seguranca-financeira.html"
+  },
+  {
+    "id": "entenda-simulador-cdb-inteligente-jupiter-lite",
+    "title": "Como Funciona o Simulador de CDB Inteligente do Júpiter Lite",
+    "date": "28 Nov 2025",
+    "author": "Equipe Júpiter",
+    "category": "Ferramentas Financeiras",
+    "image": "https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=800&q=80",
+    "summary": "Você sabe quanto seu dinheiro realmente rende? Veja como a ferramenta busca a taxa DI automaticamente e calcula impostos.",
+    "contentUrl": "assets/posts/simulador-cdb.html"
+  },
+  {
+    "id": "o-perigo-de-deixar-dinheiro-parado-conta-corrente",
+    "title": "Por que deixar dinheiro parado na conta corrente faz você perder dinheiro todos os meses",
+    "date": "01 Dez 2025",
+    "author": "Wallace Fernandes",
+    "category": "Educação Financeira",
+    "image": "https://images.unsplash.com/photo-1518458028785-8fbcd101ebb9?auto=format&fit=crop&w=800&q=80",
+    "summary": "A inflação está comendo seu dinheiro. Veja como mover seu saldo para um CDB com liquidez diária.",
+    "contentUrl": "assets/posts/dinheiro-parado.html"
+  }
+]
