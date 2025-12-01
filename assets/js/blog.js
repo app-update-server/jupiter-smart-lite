@@ -260,10 +260,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                             <i class="fab fa-whatsapp"></i> WhatsApp
                         </button>
                         
-                        <button onclick="window.shareSocial('facebook', '${postTitleEncoded}', '${pageUrl}')" class="share-btn share-fb">
-                            <i class="fab fa-facebook-f"></i> Facebook
-                        </button>
-
                         <button onclick="window.shareSocial('twitter', '${postTitleEncoded}', '${pageUrl}')" class="share-btn share-x">
                             <i class="fab fa-x-twitter"></i> X
                         </button>
