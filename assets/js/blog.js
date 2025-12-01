@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div style="margin-top:50px; padding:30px; background:var(--cause-bg); border-radius:12px; text-align:center; border:1px solid var(--cause-border);">
                     <h3 style="color:var(--accent); margin-bottom:10px;">Gostou do conteúdo?</h3>
                     <p style="color:var(--text-muted); margin-bottom:20px;">Aplique isso na prática com o Júpiter Smart Lite.</p>
-                    <a href="index.html#comprar" class="btn btn-cta">BAIXAR APP</a>
+                    <a href="./#comprar" class="btn btn-cta">BAIXAR APP</a>
                 </div>
             `;
 
@@ -299,3 +299,4 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 });
+
