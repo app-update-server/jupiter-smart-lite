@@ -9,9 +9,12 @@
     const data = [
         { name: "Ricardo M.", city: "São Paulo, SP", action: "acabou de comprar." },
         { name: "Ana Paula", city: "Rio de Janeiro, RJ", action: "fez uma doação." },
-        { name: "Carlos E.", city: "Belo Horizonte, MG", action: "baixou o Júpiter Lite." },
-        { name: "Fernanda L.", city: "Curitiba, PR", action: "garantiu a licença." },
-        { name: "Roberto G.", city: "Porto Alegre, RS", action: "está organizando as finanças." }
+        { name: "Carlos E.", city: "Belo Horizonte, MG", action: "comprou o Júpiter Lite." },
+        { name: "Fernanda L.", city: "Curitiba, PR", action: "garantiu a licença Lite." },
+        { name: "Roberto G.", city: "Porto Alegre, RS", action: "está organizando as finanças." },
+		{ name: "William B.", city: "Rio de Janeiro, RJ", action: "garantiu essa oferta." },
+		{ name: "Anderson G.", city: "Belo Horizonte, MG", action: "acabou de comprar." },
+		{ name: "Viviane L.", city: "Rio de Janeiro, RJ", action: "acessou o checkout" }
     ];
 
     // Bloqueio Mobile (Opcional: Se quiser que apareça no celular, remova o if abaixo)
