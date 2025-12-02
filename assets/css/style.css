@@ -865,3 +865,50 @@ body.dark-mode details.ac[open] summary {
 /* Cores das Redes (Adicionar ao final da lista existente) */
 .share-fb { background-color: #1877F2; } /* Facebook Azul */
 .share-x { background-color: #000000; } /* X (Twitter) Preto */
+
+/* =========================================
+   PACOTE DE POLIMENTO VISUAL (VIBE TECH)
+   ========================================= */
+
+/* 1. TEXTO GRADIENTE ANIMADO (Hero) */
+/* Aplica apenas no destaque do título principal */
+.hero h1 .highlight {
+    background: linear-gradient(90deg, var(--accent) 0%, #fb923c 50%, var(--accent) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent; /* Fallback */
+    animation: textShine 4s linear infinite;
+}
+
+/* 2. LEVITAÇÃO DA IMAGEM (Hero) */
+.hero img {
+    animation: floatHero 6s ease-in-out infinite;
+}
+
+/* 3. BOTÃO CTA COM "PULSO" (Magnético) */
+.btn-cta {
+    animation: pulseGlow 2s infinite;
+}
+
+/* --- DEFINIÇÃO DAS ANIMAÇÕES (KEYFRAMES) --- */
+
+/* Brilho correndo no texto */
+@keyframes textShine {
+    to { background-position: 200% center; }
+}
+
+/* Flutuação suave (Sobe e desce) */
+@keyframes floatHero {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); } /* Sobe 15px */
+    100% { transform: translateY(0px); }
+}
+
+/* Onda de energia no botão */
+@keyframes pulseGlow {
+    0% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(249, 115, 22, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
+}
