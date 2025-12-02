@@ -27,16 +27,15 @@
     <header>
         <div class="container">
             <nav>
-                <a href="/" class="logo">
+                <a href="./" class="logo">
                     <img src="assets/img/logo.png" alt="Logo" class="logo-img">
                 </a>
-                
-                <div class="nav-right">
-                    <a href="blog.html" class="back-link">Voltar ao Blog</a>
+                <div class="nav-right" style="display: flex; align-items: center; gap: 15px;">
                     
-                    <button id="theme-toggle" class="theme-btn" aria-label="Alternar Tema">
-                        <i class="fas fa-moon"></i>
-                    </button>
+                    <a href="blog.html" class="back-link" style="color: var(--text-main); font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 8px;">
+                        <i class="fas fa-arrow-left"></i> Voltar
+                    </a>
+					<button class="theme-btn" id="theme-toggle"><i class="fas fa-moon"></i></button>
                 </div>
             </nav>
         </div>
@@ -64,4 +63,3 @@
     <script src="assets/js/blog.js"></script>
 </body>
 </html>
-
