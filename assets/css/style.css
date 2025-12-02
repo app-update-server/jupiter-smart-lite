@@ -625,51 +625,76 @@ footer {
 .article-body ul { margin-bottom: 20px; padding-left: 20px; background: var(--bg-body); padding: 30px; border-radius: 8px; }
 .article-body li { margin-bottom: 10px; }
 
-/* --- (CRIA AS LISTAS NUMERADAS BONITAS) --- */
+/* --- LISTAS NUMERADAS TIPO TIMELINE (ELITE UI v2) --- */
 
-/* Reseta o estilo padrão feio */
+/* Container da Lista */
 .article-body ol {
-    list-style: none; /* Remove os números originais */
-    counter-reset: article-step-counter; /* Cria um contador novo */
+    list-style: none;
+    counter-reset: article-step-counter;
     padding: 0;
-    margin: 40px 0; /* Espaço generoso acima e abaixo da lista */
+    margin: 40px 0;
 }
 
 /* O Item da Lista (Texto) */
 .article-body ol li {
     position: relative;
-    padding-left: 50px; /* Recuo para o texto não ficar em cima do número */
-    margin-bottom: 25px; /* Respiro vertical entre os passos */
+    padding-left: 60px; /* Mais espaço para caber a bolinha e a linha */
+    padding-bottom: 30px; /* Espaço extra embaixo para a linha crescer */
     color: var(--text-main);
     line-height: 1.7;
 }
 
+/* Remove o espaço extra do último item */
+.article-body ol li:last-child {
+    padding-bottom: 0;
+}
+
 /* O Número (Bolinha Azul) */
 .article-body ol li::before {
-    content: counter(article-step-counter); /* Pega o número atual */
-    counter-increment: article-step-counter; /* Soma +1 */
+    content: counter(article-step-counter);
+    counter-increment: article-step-counter;
     
     position: absolute;
     left: 0;
-    top: -2px; /* Alinhamento fino com a primeira linha de texto */
+    top: 0; /* Alinhado ao topo */
+    z-index: 2; /* Fica NA FRENTE da linha */
     
     width: 32px;
     height: 32px;
-    background-color: var(--primary); /* Azul da Marca */
+    background-color: var(--primary);
     color: white;
     
-    border-radius: 50%; /* Faz virar uma bolinha */
+    border-radius: 50%;
     text-align: center;
-    line-height: 32px; /* Centraliza o número verticalmente */
+    line-height: 32px;
     font-weight: 700;
     font-size: 0.95rem;
-    box-shadow: 0 4px 10px rgba(24, 121, 232, 0.3); /* Sombra suave */
+    box-shadow: 0 0 0 4px var(--bg-card); /* Borda branca para separar da linha */
 }
 
-/* Ajuste para Dark Mode (Opcional, mantém o contraste) */
+/* A Linha Conectora (Timeline) */
+.article-body ol li::after {
+    content: '';
+    position: absolute;
+    left: 15px; /* Centralizado com a bolinha (32px / 2 - 1px) */
+    top: 32px;  /* Começa logo abaixo da bolinha */
+    bottom: 0;  /* Vai até o final do item */
+    width: 2px; /* Espessura da linha */
+    background-color: #e2e8f0; /* Cor cinza suave (var(--border)) */
+    z-index: 1; /* Fica ATRÁS da bolinha */
+}
+
+/* Esconde a linha do último item (não conecta com nada) */
+.article-body ol li:last-child::after {
+    display: none;
+}
+
+/* Ajuste Dark Mode */
 body.dark-mode .article-body ol li::before {
-    background-color: var(--primary); 
-    color: white;
+    box-shadow: 0 0 0 4px var(--bg-card); /* Mantém a borda da cor do fundo escuro */
+}
+body.dark-mode .article-body ol li::after {
+    background-color: var(--border); /* Linha mais escura no modo noturno */
 }
 
 /* --- FIM DO CÓDIGO COLADO --- */
