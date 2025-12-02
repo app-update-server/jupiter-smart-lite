@@ -23,6 +23,7 @@
             text-align: center;
             background-color: var(--bg-body);
             flex-direction: column;
+            transition: background-color 0.3s ease; /* Suavidade para Dark Mode */
         }
 
         .error-container {
@@ -90,13 +91,15 @@
         <p>A página que você tentou acessar não existe ou foi movida. Não se preocupe, seus dados financeiros continuam seguros no seu PC.</p>
 
         <a href="./" class="btn btn-primary">
-            <i class="fas fa-home mr-2"></i> VOLTAR PARA O INÍCIO
+            <i class="fas fa-home" style="margin-right: 8px;"></i> VOLTAR PARA O INÍCIO
         </a>
 
         <div class="redirect-counter">
             Redirecionando automaticamente em <span id="countdown">10</span> segundos...
         </div>
     </div>
+
+    <script src="assets/js/script.js"></script>
 
     <script>
         // Lógica de Redirecionamento Automático
@@ -109,11 +112,10 @@
             
             if (seconds <= 0) {
                 clearInterval(interval);
-                window.location.href = './index.html'; // Redireciona
+                window.location.href = './'; // Redireciona para a raiz limpa
             }
         }, 1000);
     </script>
 
 </body>
-
 </html>
