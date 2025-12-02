@@ -625,6 +625,55 @@ footer {
 .article-body ul { margin-bottom: 20px; padding-left: 20px; background: var(--bg-body); padding: 30px; border-radius: 8px; }
 .article-body li { margin-bottom: 10px; }
 
+/* --- (CRIA AS LISTAS NUMERADAS BONITAS) --- */
+
+/* Reseta o estilo padrão feio */
+.article-body ol {
+    list-style: none; /* Remove os números originais */
+    counter-reset: article-step-counter; /* Cria um contador novo */
+    padding: 0;
+    margin: 40px 0; /* Espaço generoso acima e abaixo da lista */
+}
+
+/* O Item da Lista (Texto) */
+.article-body ol li {
+    position: relative;
+    padding-left: 50px; /* Recuo para o texto não ficar em cima do número */
+    margin-bottom: 25px; /* Respiro vertical entre os passos */
+    color: var(--text-main);
+    line-height: 1.7;
+}
+
+/* O Número (Bolinha Azul) */
+.article-body ol li::before {
+    content: counter(article-step-counter); /* Pega o número atual */
+    counter-increment: article-step-counter; /* Soma +1 */
+    
+    position: absolute;
+    left: 0;
+    top: -2px; /* Alinhamento fino com a primeira linha de texto */
+    
+    width: 32px;
+    height: 32px;
+    background-color: var(--primary); /* Azul da Marca */
+    color: white;
+    
+    border-radius: 50%; /* Faz virar uma bolinha */
+    text-align: center;
+    line-height: 32px; /* Centraliza o número verticalmente */
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 10px rgba(24, 121, 232, 0.3); /* Sombra suave */
+}
+
+/* Ajuste para Dark Mode (Opcional, mantém o contraste) */
+body.dark-mode .article-body ol li::before {
+    background-color: var(--primary); 
+    color: white;
+}
+
+/* --- FIM DO CÓDIGO COLADO --- */
+
 /* --- WIDGETS --- */
 .widget { background: white; padding: 25px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 30px; }
 .widget-sales { text-align: center; border-top: 5px solid var(--accent); }
