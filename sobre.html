@@ -299,28 +299,26 @@
                </div>
 
                 <div class="footer-col newsletter-col">
-    <h4>Clube Júpiter</h4>
-    <p class="footer-desc">Receba dicas de ouro para seu dinheiro render mais.</p>    
-    <form id="newsletter-form" action="https://api.web3forms.com/submit" method="POST" class="footer-form">
-        <input type="hidden" name="access_key" value="34dd0c1c-5d76-4e8f-b10e-3e937a393ffe">       
-        <input type="hidden" name="subject" value="Novo Lead - Clube Júpiter">
-        <input type="hidden" name="from_name" value="Site Júpiter Lite">
-        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-        <div class="input-group">
-            <input type="email" name="email" placeholder="Seu melhor e-mail" required>
+				<h4>Clube Júpiter</h4>
+				<p class="footer-desc">Receba dicas de ouro para seu dinheiro render mais.</p>
+				<form id="google-sheet-form" class="footer-form">
+				<input type="hidden" name="origem" value="Júpiter Lite">    
+				<div class="input-group">
+				<input type="email" name="email" placeholder="Seu melhor e-mail" required>
             <button type="submit" class="btn-footer" aria-label="Inscrever">
-                <i class="fas fa-paper-plane"></i>
+            <i class="fas fa-paper-plane"></i>
             </button>
-        </div>
-    </form>
-    <div id="newsletter-success" style="display: none; margin-top: 15px; color: #22c55e; font-weight: 600; font-size: 0.9rem;">
-        <i class="fas fa-check-circle"></i> Inscrição realizada com sucesso!
-    </div>
-    
-    <div id="newsletter-error" style="display: none; margin-top: 15px; color: #ef4444; font-weight: 600; font-size: 0.9rem;">
-        <i class="fas fa-times-circle"></i> Erro ao enviar. Tente novamente.
-    </div>
-</div></div>
+           </div>
+           </form>
+
+            <div id="sheet-success" style="display: none; margin-top: 15px; color: #22c55e; font-weight: 600; font-size: 0.9rem;">
+            <i class="fas fa-check-circle"></i> Cadastrado com sucesso!
+            </div>
+            <div id="sheet-error" style="display: none; margin-top: 15px; color: #ef4444; font-weight: 600; font-size: 0.9rem;">
+           <i class="fas fa-times-circle"></i> Erro ao salvar.
+           </div>
+          </div>
+		  </div>
 
             <div class="footer-divider"></div>
 
