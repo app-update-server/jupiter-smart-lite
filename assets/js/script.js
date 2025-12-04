@@ -192,58 +192,40 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-/* --- NEWSLETTER AJAX (WEB3FORMS) --- */
+/* --- GOOGLE SHEETS INTEGRATION (ILIMITADO) --- */
 document.addEventListener("DOMContentLoaded", function() {
-    const form = document.getElementById('newsletter-form');
-    const successMsg = document.getElementById('newsletter-success');
-    const errorMsg = document.getElementById('newsletter-error');
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbz5V1-puaH1rAgOmY2sYryJN-EoD9fV3183_99wIfMXynyCMse20gmYPjh43ef74oPUfA/exec';
+    const form = document.getElementById('google-sheet-form');
+    const successMsg = document.getElementById('sheet-success');
+    const errorMsg = document.getElementById('sheet-error');
 
     if (form) {
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Impede o recarregamento da página
-
-            const submitBtn = form.querySelector('button');
-            const originalIcon = submitBtn.innerHTML;
-
-            // 1. Muda botão para Loading
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-            submitBtn.disabled = true;
+        form.addEventListener('submit', e => {
+            e.preventDefault();
             
-            // Esconde mensagens antigas
-            successMsg.style.display = 'none';
-            errorMsg.style.display = 'none';
+            const btn = form.querySelector('button');
+            const originalBtn = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // Loading
+            btn.disabled = true;
 
-            const formData = new FormData(form);
-
-            try {
-                const response = await fetch("https://api.web3forms.com/submit", {
-                    method: "POST",
-                    body: formData
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    // 2. Sucesso!
-                    form.reset(); // Limpa o campo
-                    successMsg.style.display = 'block'; // Mostra mensagem verde
+            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    form.reset();
+                    successMsg.style.display = 'block';
+                    errorMsg.style.display = 'none';
+                    btn.innerHTML = originalBtn;
+                    btn.disabled = false;
                     
-                    // Opcional: Esconder o formulário após sucesso
-                    // form.style.display = 'none'; 
-                } else {
-                    throw new Error(data.message);
-                }
-
-            } catch (error) {
-                // 3. Erro
-                console.error(error);
-                errorMsg.style.display = 'block'; // Mostra mensagem vermelha
-                errorMsg.innerText = "Erro: " + error.message;
-            } finally {
-                // 4. Restaura o botão
-                submitBtn.innerHTML = originalIcon;
-                submitBtn.disabled = false;
-            }
+                    // Opcional: Sumir mensagem após 5s
+                    setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    errorMsg.style.display = 'block';
+                    successMsg.style.display = 'none';
+                    btn.innerHTML = originalBtn;
+                    btn.disabled = false;
+                });
         });
     }
 });
