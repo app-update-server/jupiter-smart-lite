@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quase lá! - Júpiter Smart</title>
+    <link rel="icon" href="assets/img/favicon.png" type="image/png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        /* Ajuste exclusivo para esta página centralizada */
+        .thank-you-hero {
+            min-height: 80vh; /* Ocupa quase a tela toda */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: var(--hero-bg);
+            padding: 20px;
+        }
+        .step-box {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .mail-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+    </style>
+</head>
+<body>
+
+    <section class="thank-you-hero">
+        <div class="container">
+            <div class="step-box">
+                <div class="mail-icon"><i class="fas fa-envelope-open-text"></i></div>
+                
+                <h1 style="color: var(--text-title); margin-bottom: 15px;">Falta só um clique!</h1>
+                
+                <p style="color: var(--text-main); font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px;">
+                    Enviamos um e-mail de confirmação para você agora mesmo.<br>
+                    <strong>Abra seu e-mail e clique no link</strong> para ativar sua inscrição e garantir o recebimento das dicas financeiras.
+                </p>
+
+                <div class="alert-info" style="text-align: left; margin-bottom: 30px; font-size: 0.9rem;">
+                    <i class="fas fa-info-circle"></i> 
+                    <strong>Não encontrou?</strong> Verifique a caixa de Spam ou Promoções.
+                </div>
+
+                <a href="blog.html" class="btn btn-primary">Voltar para o Blog</a>
+            </div>
+        </div>
+    </section>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
