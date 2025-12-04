@@ -15,7 +15,8 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"></noscript>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 	<link rel="preload" as="image" href="assets/img/hero-img.webp">
 
@@ -222,27 +223,26 @@
             <div class="tabs-content">
                 
                 <div class="tab-pane active" id="dashboard">
-                    <img src="assets/img/screen/screen-dashboard.webp" alt="Dashboard Júpiter Lite">
+                    <img src="assets/img/screen/screen-dashboard.webp" alt="Dashboard Júpiter Lite" loading="lazy" width="1200">
                     <p class="tab-caption">Visão geral das suas finanças em uma única tela.</p>
                 </div>
 
                 <div class="tab-pane" id="lancamentos">
-                    <img src="assets/img/screen/screen-lancamentos.webp" alt="Tela de Lançamentos">
+                    <img src="assets/img/screen/screen-lancamentos.webp" alt="Tela de Lançamentos" loading="lazy" width="1200">
                     <p class="tab-caption">Cadastre receitas e despesas em segundos.</p>
                 </div>
 
                 <div class="tab-pane" id="parcelas">
-                    <img src="assets/img/screen/screen-parcelas.webp" alt="Controle de Parcelas">
+                    <img src="assets/img/screen/screen-parcelas.webp" alt="Controle de Parcelas" loading="lazy" width="1200">
                     <p class="tab-caption">Visualize o impacto das compras parceladas no futuro.</p>
                 </div>
 
                 <div class="tab-pane" id="simulador">
-                    <img src="assets/img/screen/screen-simulador-cdb.webp" alt="Simulador de Investimentos">
+                    <img src="assets/img/screen/screen-simulador-cdb.webp" alt="Simulador de Investimentos" loading="lazy" width="1200">
                     <p class="tab-caption">Simule rendimentos reais com taxas atualizadas.</p>
                 </div>
 
             </div>
-        </div>
     </section>
 	
 	<section id="depoimentos" class="testimonials-section">
@@ -254,7 +254,8 @@
                 
                 <div class="testimonial-card">
                     <div class="test-header">
-                        <img src="assets/img/depoimentos/avatar1.webp" alt="Usuário" class="test-avatar"> <div>
+                        <img src="assets/img/depoimentos/avatar1.webp" alt="Usuário" class="test-avatar" loading="lazy" width="50" height="50"> 
+						<div>
                             <h4 class="test-name">Ricardo M.</h4>
                             <span class="test-role">Designer Gráfico</span>
                         </div>
@@ -265,7 +266,8 @@
 
                 <div class="testimonial-card">
                     <div class="test-header">
-                        <img src="assets/img/depoimentos/avatar2.webp" alt="Usuário" class="test-avatar"> <div>
+                        <img src="assets/img/depoimentos/avatar2.webp" alt="Usuário" class="test-avatar" loading="lazy" width="50" height="50"> 
+						<div>
                             <h4 class="test-name">Ana Clara</h4>
                             <span class="test-role">Microempreendedora</span>
                         </div>
@@ -276,7 +278,8 @@
 
                 <div class="testimonial-card">
                     <div class="test-header">
-                        <img src="assets/img/depoimentos/avatar3.webp" alt="Usuário" class="test-avatar"> <div>
+                        <img src="assets/img/depoimentos/avatar3.webp" alt="Usuário" class="test-avatar" loading="lazy" width="50" height="50"> 
+						<div>
                         
                             <h4 class="test-name">Felipe Souza</h4>
                             <span class="test-role">Fotógrafo</span>
@@ -430,10 +433,11 @@
 
     <button id="backToTop" title="Voltar ao Topo"><i class="fas fa-arrow-up"></i></button>
 
-    <script src="assets/js/script.js"></script>
-	<script src="assets/js/cookies.js"></script>
-	<script src="assets/js/notifications.js"></script>
-	<script src="assets/js/exit-intent.js"></script>
+    <script src="assets/js/script.js" defer></script>
+    
+    <script src="assets/js/cookies.js" defer></script>
+    <script src="assets/js/notifications.js" defer></script>
+    <script src="assets/js/exit-intent.js" defer></script>
 
 </body>
 </html>
