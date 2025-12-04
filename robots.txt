@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-# Novo endereço do Sitemap no subdomínio oficial
-Sitemap: https://jupiterlite.textospropagandas.com.br/sitemap.xml
