@@ -191,3 +191,59 @@ document.addEventListener("DOMContentLoaded", function() {
         yearSpan.textContent = new Date().getFullYear();
     }
 });
+
+/* --- NEWSLETTER AJAX (WEB3FORMS) --- */
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById('newsletter-form');
+    const successMsg = document.getElementById('newsletter-success');
+    const errorMsg = document.getElementById('newsletter-error');
+
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Impede o recarregamento da página
+
+            const submitBtn = form.querySelector('button');
+            const originalIcon = submitBtn.innerHTML;
+
+            // 1. Muda botão para Loading
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            submitBtn.disabled = true;
+            
+            // Esconde mensagens antigas
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch("https://api.web3forms.com/submit", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // 2. Sucesso!
+                    form.reset(); // Limpa o campo
+                    successMsg.style.display = 'block'; // Mostra mensagem verde
+                    
+                    // Opcional: Esconder o formulário após sucesso
+                    // form.style.display = 'none'; 
+                } else {
+                    throw new Error(data.message);
+                }
+
+            } catch (error) {
+                // 3. Erro
+                console.error(error);
+                errorMsg.style.display = 'block'; // Mostra mensagem vermelha
+                errorMsg.innerText = "Erro: " + error.message;
+            } finally {
+                // 4. Restaura o botão
+                submitBtn.innerHTML = originalIcon;
+                submitBtn.disabled = false;
+            }
+        });
+    }
+});
