@@ -17,10 +17,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"></noscript>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-	<link rel="preload" as="image" href="assets/img/hero-img.webp">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
 
     <link rel="stylesheet" href="assets/css/style.css">
+	<link rel="preload" as="image" href="assets/img/hero-img.webp" fetchpriority="high">
 	
 	<meta property="og:type" content="website">
     <meta property="og:title" content="Júpiter Smart Lite - Controle Financeiro Offline">
@@ -83,7 +86,7 @@
         <div class="container">
             <nav>
                 <a href="./" class="logo">
-				<img src="assets/img/logo.png" alt="Logo Júpiter Smart" class="logo-img">
+				<img src="assets/img/logo.png" alt="Logo Júpiter Lite" class="logo-img" width="180" height="40">
 				</a>
                 <div class="nav-right">
                     <ul class="menu" id="main-menu">
@@ -112,12 +115,12 @@
             <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.8; color: var(--text-muted);">🔒 Licença Vitalícia • Pagamento Único</p>
 			
             <!-- IMAGEM LOCAL (Adicione style="display:none" na imagem para ativar este) -->
-            <div class="hero-media-box reveal">
+            <div class="hero-media-box">
                 <img 
                     src="assets/img/hero-img.webp" 
                     alt="Interface do Software Júpiter Smart Lite - Controle Financeiro Windows" 
-                    width="1200" 
-                    height="800" 
+                    width="1280" 
+                    height="720" 
                     fetchpriority="high">
             </div>
 			
@@ -223,22 +226,22 @@
             <div class="tabs-content">
                 
                 <div class="tab-pane active" id="dashboard">
-                    <img src="assets/img/screen/screen-dashboard.webp" alt="Dashboard Júpiter Lite" loading="lazy" width="1200">
+                    <img src="assets/img/screen/screen-dashboard.webp" alt="Dashboard Júpiter Lite" loading="lazy" width="1200" height="640">
                     <p class="tab-caption">Visão geral das suas finanças em uma única tela.</p>
                 </div>
 
                 <div class="tab-pane" id="lancamentos">
-                    <img src="assets/img/screen/screen-lancamentos.webp" alt="Tela de Lançamentos" loading="lazy" width="1200">
+                    <img src="assets/img/screen/screen-lancamentos.webp" alt="Tela de Lançamentos" loading="lazy" width="1200" height="640">
                     <p class="tab-caption">Cadastre receitas e despesas em segundos.</p>
                 </div>
 
                 <div class="tab-pane" id="parcelas">
-                    <img src="assets/img/screen/screen-parcelas.webp" alt="Controle de Parcelas" loading="lazy" width="1200">
+                    <img src="assets/img/screen/screen-parcelas.webp" alt="Controle de Parcelas" loading="lazy" width="1200" height="640">
                     <p class="tab-caption">Visualize o impacto das compras parceladas no futuro.</p>
                 </div>
 
                 <div class="tab-pane" id="simulador">
-                    <img src="assets/img/screen/screen-simulador-cdb.webp" alt="Simulador de Investimentos" loading="lazy" width="1200">
+                    <img src="assets/img/screen/screen-simulador-cdb.webp" alt="Simulador de Investimentos" loading="lazy" width="1200" height="640">
                     <p class="tab-caption">Simule rendimentos reais com taxas atualizadas.</p>
                 </div>
 
@@ -361,7 +364,7 @@
                 
                 <div class="footer-col">
                     <a href="#" class="footer-logo">
-                        <img src="assets/img/logo.png" alt="Júpiter Smart" class="logo-img">
+                        <img src="assets/img/logo.png" alt="Logo Júpiter Lite" class="logo-img" width="180" height="40">
                     </a>
                     <p class="footer-desc">
                         Simplificando sua vida financeira e ajudando a causa animal. Organização inteligente, segura e offline.
