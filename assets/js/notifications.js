@@ -1,8 +1,8 @@
 (function() {
     // --- CONFIGURAÇÃO REALISTA (Elite) ---
-    const NOTIFICATION_DELAY = 20000; // 20 segundos (Um pouco mais dinâmico)
-    const DISPLAY_TIME = 6000;        // Fica visível por 6s (Mais tempo para ler)
-    const MAX_NOTIFICATIONS = 5;      // Aumentei para 5 vezes por sessão
+    const NOTIFICATION_DELAY = 60000; // 20 segundos
+    const DISPLAY_TIME = 6000;        // Fica visível por 6s
+    const MAX_NOTIFICATIONS = 3;      // Limite por sessão
     
     let count = 0;
 
@@ -16,8 +16,6 @@
         { name: "William B.", city: "Rio de Janeiro, RJ", action: "garantiu essa oferta." },
         { name: "Anderson G.", city: "Belo Horizonte, MG", action: "acabou de comprar." },
         { name: "Viviane L.", city: "Rio de Janeiro, RJ", action: "acessou o checkout." },
-        
-        // Novos Nomes Adicionados
         { name: "Juliana S.", city: "Salvador, BA", action: "baixou o software." },
         { name: "Marcos P.", city: "Recife, PE", action: "começou a usar." },
         { name: "Patrícia A.", city: "Brasília, DF", action: "garantiu a licença." },
@@ -30,26 +28,27 @@
         { name: "Bruno K.", city: "Joinville, SC", action: "baixou o software." }
     ];
 
-    // Bloqueio Mobile (Mantido para não poluir tela pequena)
+    // Bloqueio Mobile (Mantém leveza em telas pequenas)
     if (window.innerWidth <= 768) return; 
 
     const style = document.createElement('style');
     style.innerHTML = `
         .social-toast {
             position: fixed; 
-            bottom: 30px; left: 30px; /* AJUSTE ELITE: Mais afastado da borda */
+            bottom: 30px; left: 30px;
             background: #fff;
-            border-left: 4px solid #f97316; /* Laranja Júpiter (Destaque) */
+            border-left: 4px solid #f97316;
             padding: 15px 25px; 
-            border-radius: 12px; /* Mais arredondado */
-            box-shadow: 0 10px 40px rgba(0,0,0,0.12); /* Sombra mais suave e difusa */
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
             display: flex; align-items: center;
             gap: 15px; z-index: 9999; font-family: 'Inter', sans-serif;
-            transform: translateY(100px); /* Nasce de baixo para cima */
+            transform: translateY(100px); 
             opacity: 0; 
-            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1); /* Animação Premium */
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
             max-width: 350px; 
             pointer-events: none;
+            will-change: transform, opacity; /* Otimização GPU */
         }
         .social-toast.visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
         
@@ -81,9 +80,9 @@
         if (count >= MAX_NOTIFICATIONS) return;
 
         const item = data[Math.floor(Math.random() * data.length)];
-        // Gera um tempo aleatório entre 2 e 12 minutos atrás
         const timeAgo = Math.floor(Math.random() * 10) + 2;
 
+        // 1. Inserção no DOM (Causa invalidação de layout)
         toast.innerHTML = `
             <span class="close-toast">&times;</span>
             <div class="st-icon">🔥</div>
@@ -94,7 +93,14 @@
             </div>
         `;
 
-        toast.classList.add('visible');
+        // 2. SOLUÇÃO DO REFLOW (Performance):
+        // Usamos requestAnimationFrame duplo para garantir que o navegador 
+        // tenha tempo de processar o HTML antes de aplicar a classe de animação.
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                toast.classList.add('visible');
+            });
+        });
         
         // Botão de fechar manual
         const closeBtn = toast.querySelector('.close-toast');
@@ -115,5 +121,5 @@
     setTimeout(() => {
         showToast();
         setInterval(showToast, NOTIFICATION_DELAY + DISPLAY_TIME);
-    }, 8000); // Começa mais rápido (8s)
+    }, 8000);
 })();
