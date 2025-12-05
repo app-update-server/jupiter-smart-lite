@@ -714,8 +714,9 @@ body.page-home .footer-grid {
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 30px;
-    transition: transform 0.3s;
-    height: 240px; /* Altura um pouco maior para caber o texto */
+    transition: transform 0.3s, border-color 0.3s;
+    /* [AJUSTE] Aumentei levemente para 260px para dar respiro ao texto */
+    height: 260px; 
 }
 
 .blog-card:hover {
@@ -725,26 +726,30 @@ body.page-home .footer-grid {
 }
 
 .blog-card-link-img {
-    width: 35%; /* Imagem ocupa 35% da largura */
-    flex-shrink: 0;
+    width: 38%; /* Aumentei um pouco a área da imagem para destaque */
+    height: 100%;
+    display: block;
+    flex-shrink: 0; /* Impede que a imagem seja esmagada */
     position: relative;
     overflow: hidden;
 }
 
 .blog-card-img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    /* [CRUCIAL] O !important vence a regra global 'height: auto' */
+    height: 100% !important; 
+    object-fit: cover; /* Garante preenchimento sem distorção */
     transition: transform 0.5s;
 }
+
 .blog-card:hover .blog-card-img { transform: scale(1.05); }
 
 .blog-card-body { 
     padding: 25px; 
-    width: 65%;
+    width: 62%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* O conteúdo vai se espalhar verticalmente */
 }
 
 .blog-card-cat { 
@@ -753,15 +758,21 @@ body.page-home .footer-grid {
     font-size: 0.75rem; 
     text-transform: uppercase; 
     margin-bottom: 8px;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
 }
 
 .blog-card h2 { 
-    font-size: 1.4rem; 
+    font-size: 1.25rem; 
     line-height: 1.3; 
     margin-bottom: 10px; 
     font-weight: 700;
     color: var(--text-title);
+    
+    /* Trava o título em no máximo 2 linhas */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 .blog-card h2 a { text-decoration: none; color: inherit; }
 .blog-card h2 a:hover { color: var(--primary); }
@@ -769,18 +780,32 @@ body.page-home .footer-grid {
 .blog-card p { 
     color: var(--text-muted); 
     font-size: 0.95rem; 
+    line-height: 1.5;
     margin-bottom: 15px;
+    
+    /* [CORREÇÃO INTELIGENTE] */
     display: -webkit-box;
-    -webkit-line-clamp: 5; /* Agora mostra mais texto antes de cortar */
+    -webkit-line-clamp: 3; /* Mostra exatamente 3 linhas */
     -webkit-box-orient: vertical;
     overflow: hidden;
+    text-overflow: ellipsis; /* Força os três pontinhos (...) */
+    
+    /* Garante que o texto ocupe o espaço disponível mas não empurre o botão */
+    flex-grow: 1; 
 }
+
+/* Se preferir "Só Título", descomente a linha abaixo: */
+/* .blog-card p { display: none; } */
 
 .read-link { 
     color: var(--accent); 
     font-weight: 700; 
     text-decoration: none; 
     font-size: 0.9rem; 
+    margin-top: auto; /* Empurra o link para o final do card */
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
 }
 .read-link:hover { text-decoration: underline; }
 
@@ -1851,4 +1876,89 @@ body.dark-mode .tab-btn.active { color: white; border-color: var(--primary); }
     0% { box-shadow: 0 0 0 0 rgba(24, 121, 232, 0.7); }
     70% { box-shadow: 0 0 0 15px rgba(24, 121, 232, 0); }
     100% { box-shadow: 0 0 0 0 rgba(24, 121, 232, 0); }
+}
+
+/* =========================================
+   ALERTAS PERSONALIZADOS (JÚPITER UI)
+   ========================================= */
+
+.alert {
+    --szsp: 20px;
+    /* Define cor padrão se não especificada */
+    --clr: var(--primary); 
+    position: relative;
+    border-radius: 8px;
+    margin: 25px 0;
+    padding: calc(var(--szsp) * .8) var(--szsp); /* Ajustei padding */
+    font-size: 0.95rem; /* Ajuste para leitura melhor */
+    line-height: 1.6;
+    overflow: hidden;
+    z-index: 1;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid transparent; /* Prepara para borda */
+}
+
+/* Fundo colorido translúcido */
+.alert:not(.outline)::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--clr);
+    z-index: -1;
+    opacity: 0.1; /* Fundo suave */
+}
+
+/* Estilo Outline (Borda apenas) */
+.alert.outline {
+    border: 1px solid var(--clr);
+    color: var(--clr);
+    background: transparent;
+}
+
+/* Configuração dos Ícones SVG */
+.alert.info, .alert.warning, .alert.success, .alert.error {
+    background-repeat: no-repeat;
+    background-size: 24px; /* Tamanho fixo do ícone */
+    background-position: 20px 20px; /* Posição do ícone */
+    padding-left: 60px; /* Espaço para o texto não ficar em cima do ícone */
+    color: var(--text-main); /* Cor do texto base */
+}
+
+/* Títulos dentro do Alerta */
+.alert > strong:first-child,
+.alert > b:first-child {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 700;
+    color: var(--clr); /* Título na cor do alerta */
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+/* Ícones SVG (Data URI) */
+.alert.info { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-144c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32z' fill='%2300a7e6'/%3E%3C/svg%3E"); }
+.alert.warning { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zm32 224c0 17.7-14.3 32-32 32s-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32z' fill='%23ecb621'/%3E%3C/svg%3E"); }
+.alert.success { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z' fill='%2341ba79'/%3E%3C/svg%3E"); }
+.alert.error { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M256 0c53 0 96 43 96 96v3.6c0 15.7-12.7 28.4-28.4 28.4H188.4c-15.7 0-28.4-12.7-28.4-28.4V96c0-53 43-96 96-96zM41.4 105.4c12.5-12.5 32.8-12.5 45.3 0l64 64c.7 .7 1.3 1.4 1.9 2.1c14.2-7.3 30.4-11.4 47.5-11.4H312c17.1 0 33.2 4.1 47.5 11.4c.6-.7 1.2-1.4 1.9-2.1l64-64c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3l-64 64c-.7 .7-1.4 1.3-2.1 1.9c6.2 12 10.1 25.3 11.1 39.5H480c17.7 0 32 14.3 32 32s-14.3 32-32 32H416c0 24.6-5.5 47.8-15.4 68.6c2.2 1.3 4.2 2.9 6 4.8l64 64c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0l-63.1-63.1c-24.5 21.8-55.8 36.2-90.3 39.6V240c0-8.8-7.2-16-16-16s-16 7.2-16 16V479.2c-34.5-3.4-65.8-17.8-90.3-39.6L86.6 502.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l64-64c1.9-1.9 3.9-3.4 6-4.8C101.5 367.8 96 344.6 96 320H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H96.3c1.1-14.1 5-27.5 11.1-39.5c-.7-.6-1.4-1.2-2.1-1.9l-64-64c-12.5-12.5-12.5-32.8 0-45.3z' fill='%23ff6372'/%3E%3C/svg%3E"); }
+
+/* --- CORES (MODO CLARO) --- */
+.alert.info { --clr: #3e69a8; }
+.alert.warning { --clr: #8f6919; }
+.alert.success { --clr: #127a5b; }
+.alert.error { --clr: #be2e3c; }
+
+/* --- CORES (MODO ESCURO - DARK MODE) --- */
+/* Aqui fazemos a mágica acontecer para o Júpiter */
+body.dark-mode .alert.info { --clr: #00a7e6; }
+body.dark-mode .alert.warning { --clr: #ecb621; }
+body.dark-mode .alert.success { --clr: #41ba79; }
+body.dark-mode .alert.error { --clr: #ff6372; }
+
+/* Ajuste de contraste do texto no Dark Mode */
+body.dark-mode .alert {
+    color: #e2e8f0; /* Texto claro genérico */
 }
