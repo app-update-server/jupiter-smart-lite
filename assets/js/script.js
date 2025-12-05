@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 /* --- GOOGLE SHEETS INTEGRATION (ILIMITADO) --- */
 document.addEventListener("DOMContentLoaded", function() {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbz5V1-puaH1rAgOmY2sYryJN-EoD9fV3183_99wIfMXynyCMse20gmYPjh43ef74oPUfA/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzVSMVcdbNGLhVasOcTiiUUqiYeg52X1e0jfqkG7-9zX_sr1Jg435r1Hx4dD6AaubrFXg/exec';
     const form = document.getElementById('google-sheet-form');
     const successMsg = document.getElementById('sheet-success');
     const errorMsg = document.getElementById('sheet-error');
