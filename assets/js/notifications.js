@@ -1,12 +1,14 @@
 (function() {
-    // --- CONFIGURAÇÃO REALISTA (Elite) ---
-    const NOTIFICATION_DELAY = 60000; // 20 segundos
-    const DISPLAY_TIME = 6000;        // Fica visível por 6s
-    const MAX_NOTIFICATIONS = 3;      // Limite por sessão
-    
-    let count = 0;
+    // --- CONFIGURAÇÃO DE ELITE ---
+    const CONFIG = {
+        minDelay: 45000,    // Mínimo 45 segundos entre uma e outra
+        maxDelay: 90000,    // Máximo 1m 30s (Aleatoriedade humana)
+        displayTime: 6000,  // Tempo visível na tela
+        maxPerSession: 3,   // Limite real por sessão (salvo no navegador)
+        startDelay: 10000   // Primeira notificação após 10s de site aberto
+    };
 
-    // --- BANCO DE DADOS EXPANDIDO ---
+    // --- BANCO DE DADOS (Prova Social) ---
     const data = [
         { name: "Ricardo M.", city: "São Paulo, SP", action: "acabou de comprar." },
         { name: "Ana Paula", city: "Rio de Janeiro, RJ", action: "fez uma doação." },
@@ -28,9 +30,14 @@
         { name: "Bruno K.", city: "Joinville, SC", action: "baixou o software." }
     ];
 
-    // Bloqueio Mobile (Mantém leveza em telas pequenas)
-    if (window.innerWidth <= 768) return; 
+    // Verifica Mobile e Limite de Sessão
+    if (window.innerWidth <= 768) return;
+    
+    // Recupera quantas já foram mostradas nesta sessão
+    let sessionCount = parseInt(sessionStorage.getItem('jupiter_notif_count') || '0');
+    if (sessionCount >= CONFIG.maxPerSession) return;
 
+    // --- INJEÇÃO DE ESTILOS (CSS in JS) ---
     const style = document.createElement('style');
     style.innerHTML = `
         .social-toast {
@@ -38,7 +45,7 @@
             bottom: 30px; left: 30px;
             background: #fff;
             border-left: 4px solid #f97316;
-            padding: 15px 25px; 
+            padding: 15px 25px 15px 20px; 
             border-radius: 12px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.12);
             display: flex; align-items: center;
@@ -48,19 +55,24 @@
             transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
             max-width: 350px; 
             pointer-events: none;
-            will-change: transform, opacity; /* Otimização GPU */
+            visibility: hidden; /* Garante que não clica quando invisível */
         }
-        .social-toast.visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
+        .social-toast.visible { 
+            transform: translateY(0); 
+            opacity: 1; 
+            pointer-events: auto;
+            visibility: visible;
+        }
         
         .st-icon { font-size: 24px; animation: pulseIcon 2s infinite; }
-        
         .st-content { font-size: 0.9rem; line-height: 1.4; color: #334155; }
         .st-name { font-weight: 700; color: #1e293b; }
         .st-time { font-size: 0.75rem; color: #94a3b8; display: block; margin-top: 2px; }
         
         .close-toast { 
-            position: absolute; top: 8px; right: 10px; 
-            font-size: 14px; cursor: pointer; color: #cbd5e1; transition:0.2s; 
+            position: absolute; top: 5px; right: 8px; 
+            font-size: 16px; cursor: pointer; color: #cbd5e1; 
+            width: 20px; height: 20px; text-align: center; line-height: 20px;
         }
         .close-toast:hover { color: #f97316; }
 
@@ -72,19 +84,25 @@
     `;
     document.head.appendChild(style);
 
+    // Cria o Elemento
     const toast = document.createElement('div');
     toast.className = 'social-toast';
     document.body.appendChild(toast);
 
-    function showToast() {
-        if (count >= MAX_NOTIFICATIONS) return;
+    let hideTimeout; // Variável para controlar o timer de esconder
 
+    // --- FUNÇÃO PRINCIPAL ---
+    function showToast() {
+        // Dupla checagem de limite
+        sessionCount = parseInt(sessionStorage.getItem('jupiter_notif_count') || '0');
+        if (sessionCount >= CONFIG.maxPerSession) return;
+
+        // Seleciona dados
         const item = data[Math.floor(Math.random() * data.length)];
         const timeAgo = Math.floor(Math.random() * 10) + 2;
 
-        // 1. Inserção no DOM (Causa invalidação de layout)
         toast.innerHTML = `
-            <span class="close-toast">&times;</span>
+            <div class="close-toast">&times;</div>
             <div class="st-icon">🔥</div>
             <div class="st-content">
                 <span class="st-name">${item.name}</span> de ${item.city}<br>
@@ -93,33 +111,73 @@
             </div>
         `;
 
-        // 2. SOLUÇÃO DO REFLOW (Performance):
-        // Usamos requestAnimationFrame duplo para garantir que o navegador 
-        // tenha tempo de processar o HTML antes de aplicar a classe de animação.
+        // Ativação visual
         requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-                toast.classList.add('visible');
-            });
+            toast.classList.add('visible');
+            
+            // Incrementa contador e salva
+            sessionCount++;
+            sessionStorage.setItem('jupiter_notif_count', sessionCount);
         });
-        
-        // Botão de fechar manual
+
+        // Configura o botão de fechar (Matador de bugs)
         const closeBtn = toast.querySelector('.close-toast');
-        if(closeBtn) {
-            closeBtn.onclick = () => {
-                toast.classList.remove('visible');
-            };
-        }
+        closeBtn.onclick = (e) => {
+            e.stopPropagation(); // Evita conflitos
+            forceClose();
+        };
 
-        setTimeout(() => {
-            toast.classList.remove('visible');
-        }, DISPLAY_TIME);
-
-        count++;
+        // Timer para esconder (Auto-Hide)
+        hideTimeout = setTimeout(() => {
+            closeToast();
+        }, CONFIG.displayTime);
     }
 
-    // Inicia o ciclo
-    setTimeout(() => {
-        showToast();
-        setInterval(showToast, NOTIFICATION_DELAY + DISPLAY_TIME);
-    }, 8000);
+    // --- FECHAR NOTIFICAÇÃO ---
+    function closeToast() {
+        toast.classList.remove('visible');
+        
+        // Limpa qualquer timer pendente para evitar fantasmas
+        if(hideTimeout) clearTimeout(hideTimeout);
+
+        // Só agenda a próxima DEPOIS que a atual fechou (Recursividade)
+        scheduleNext();
+    }
+
+    // --- FECHAR FORÇADO (Pelo usuário) ---
+    function forceClose() {
+        toast.classList.remove('visible');
+        if(hideTimeout) clearTimeout(hideTimeout);
+        // Se o usuário fechou, esperamos um pouco mais para mostrar a próxima
+        scheduleNext();
+    }
+
+    // --- AGENDADOR INTELIGENTE (MOTOR) ---
+    function scheduleNext() {
+        if (sessionCount >= CONFIG.maxPerSession) return;
+
+        // Gera tempo aleatório entre Min e Max
+        const randomDelay = Math.floor(Math.random() * (CONFIG.maxDelay - CONFIG.minDelay + 1)) + CONFIG.minDelay;
+        
+        console.log(`Próxima notificação em: ${randomDelay/1000} segundos`); // Debug (pode remover depois)
+
+        setTimeout(showToast, randomDelay);
+    }
+
+    // --- PAUSE NO MOUSE (UX PREMIUM) ---
+    // Se o usuário passar o mouse, cancela o timer de esconder.
+    // Quando tirar o mouse, reinicia o timer.
+    toast.addEventListener('mouseenter', () => {
+        if(hideTimeout) clearTimeout(hideTimeout);
+    });
+    
+    toast.addEventListener('mouseleave', () => {
+        if (toast.classList.contains('visible')) {
+            hideTimeout = setTimeout(closeToast, 2000); // Dá mais 2s para ler e some
+        }
+    });
+
+    // Start Inicial
+    setTimeout(showToast, CONFIG.startDelay);
+
 })();
