@@ -56,6 +56,10 @@ img {
     display: block;
 }
 
+img {
+    height: auto !important; 
+}
+
 /* --- 2. UTILITÁRIOS --- */
 .container {
     max-width: 1100px;
@@ -178,19 +182,19 @@ body.dark-mode .back-link:hover {
     color: var(--primary); /* Azul no hover */
 }
 
-/* Estilo da Imagem da Logo */
+/* Estilo da Imagem da Logo (Otimizado para PageSpeed) */
 .logo-img {
-    height: 40px;      /* Altura padrão (Desktop) */
-    width: auto;       /* Largura automática para não distorcer */
-    display: block;    /* Remove espaços fantasmas */
+    width: auto !important;      /* Obedece a largura do HTML */
+    height: auto !important;     /* Obedece a proporção (Sem distorção) */
+    max-height: 40px;            /* Limite visual Desktop */
+    display: block;
 }
 
 /* Ajuste de Segurança para Celular (Mobile) */
 @media(max-width: 480px) {
     .logo-img {
-        height: 32px;      /* Diminui um pouco no celular */
-        max-width: 180px;  /* Trava a largura máxima */
-        object-fit: contain; /* Garante que a imagem caiba nesse espaço */
+        max-height: 32px;        /* Limite visual Mobile (menor) */
+        max-width: 180px;        /* Trava de segurança */
     }
     
     /* Ajuste fino no espaçamento do cabeçalho mobile */
