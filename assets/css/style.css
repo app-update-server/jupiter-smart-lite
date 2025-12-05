@@ -736,9 +736,15 @@ body.page-home .footer-grid {
 
 .blog-card-img {
     width: 100%;
-    /* [CRUCIAL] O !important vence a regra global 'height: auto' */
+    /* Mantém a correção anterior da altura */
     height: 100% !important; 
-    object-fit: cover; /* Garante preenchimento sem distorção */
+    
+    /* Garante preenchimento sem distorcer */
+    object-fit: cover; 
+    
+    /* [NOVO] Trava o foco no centro absoluto da imagem (Horizontal e Vertical) */
+    object-position: center center; 
+    
     transition: transform 0.5s;
 }
 
