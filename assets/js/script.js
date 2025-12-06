@@ -117,8 +117,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // --- ID Manual ---
                 // Coloque os IDs dos artigos que você quer na Home, na ordem desejada
                 const selectedIds = [
-                    "controle-financeiro-jupiter-pro",  // Card 1
-                    "importancia-controle-financeiro",       // Card 2
+                    "causa-jupiter-ampara",  // Card 1
+                    "comecar-certo-jupiter-lite",       // Card 2
                     "entenda-simulador-cdb-inteligente-jupiter-lite" // Card 3
                 ];
 
