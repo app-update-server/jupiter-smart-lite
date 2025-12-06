@@ -2019,3 +2019,36 @@ body.dark-mode .lead-box-pro {
 .lead-box-pro input {
     background: var(--bg-body); /* Contraste */
 }
+
+/* --- CUSTOM SCROLLBAR PARA TABELAS --- */
+.table-wrapper::-webkit-scrollbar {
+    height: 8px; /* Altura da barra horizontal */
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: var(--bg-body); 
+    border-radius: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1; /* Cor da barra (cinza suave) */
+    border-radius: 4px;
+}
+
+/* Quando passa o mouse, fica da cor da marca */
+.table-wrapper:hover::-webkit-scrollbar-thumb {
+    background-color: var(--primary); 
+}
+
+/* --- CORREÇÃO DO BOTÃO 'COPIAR LINK' NO DARK MODE --- */
+body.dark-mode .share-copy {
+    background-color: #ffffff; /* Fundo branco para destacar no escuro */
+    color: #1e293b;            /* Texto escuro para leitura fácil */
+    border: 1px solid #e2e8f0; /* Borda sutil */
+}
+
+body.dark-mode .share-copy:hover {
+    background-color: #f1f5f9; /* Cinza claro no hover */
+    color: var(--primary);     /* Texto fica azul no hover */
+    transform: translateY(-2px);
+}
