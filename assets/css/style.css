@@ -1968,3 +1968,54 @@ body.dark-mode .alert.error { --clr: #ff6372; }
 body.dark-mode .alert {
     color: #e2e8f0; /* Texto claro genérico */
 }
+
+/* --- LEAD MAGNET BOX (Box de Captura no Artigo) --- */
+.lead-box-pro {
+    background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+    border: 2px dashed var(--primary); /* Borda tracejada azul chama atenção */
+    border-radius: 16px;
+    padding: 30px;
+    margin: 40px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Modo Escuro */
+body.dark-mode .lead-box-pro {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-color: var(--primary);
+}
+
+.lead-box-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    display: block;
+    animation: floatIcon 3s infinite ease-in-out;
+}
+
+.lead-box-title {
+    color: var(--text-title);
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.lead-box-desc {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 25px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Ajuste do formulário dentro do box */
+.lead-box-pro .footer-form {
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+.lead-box-pro input {
+    background: var(--bg-body); /* Contraste */
+}
