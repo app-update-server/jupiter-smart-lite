@@ -117,8 +117,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // --- ID Manual ---
                 // Coloque os IDs dos artigos que você quer na Home, na ordem desejada
                 const selectedIds = [
-                    "comecar-certo-jupiter-lite",  // Card 1
-                    "causa-jupiter-ampara",       // Card 2
+                    "controle-financeiro-jupiter-pro",  // Card 1
+                    "importancia-controle-financeiro",       // Card 2
                     "entenda-simulador-cdb-inteligente-jupiter-lite" // Card 3
                 ];
 
@@ -162,27 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     }
 	
-	// --- 5. PLAYER DE VÍDEO CUSTOMIZADO (HERO) ---
-    const videoOverlay = document.getElementById('videoOverlay');
-    const heroVideo = document.getElementById('heroVideo');
-
-    if (videoOverlay && heroVideo) {
-        // Ao clicar na capa ou no botão play
-        videoOverlay.addEventListener('click', () => {
-            videoOverlay.classList.add('hidden'); // Some a capa
-            heroVideo.setAttribute('controls', 'true'); // Ativa os controles nativos
-            heroVideo.play(); // Dá play
-        });
-
-        // Se o vídeo terminar, mostra a capa de novo (Opcional)
-        heroVideo.addEventListener('ended', () => {
-            videoOverlay.classList.remove('hidden');
-            heroVideo.removeAttribute('controls');
-            heroVideo.load(); // Reseta para o começo
-        });
-    }
-	
-});
+	});
 
 /* --- ATUALIZAÇÃO AUTOMÁTICA DO ANO (FOOTER) --- */
 document.addEventListener("DOMContentLoaded", function() {
@@ -192,40 +172,91 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-/* --- GOOGLE SHEETS INTEGRATION (ILIMITADO) --- */
+/* --- GOOGLE SHEETS INTEGRATION (EVENT DELEGATION - BLINDADO) --- */
+// Usamos delegação no 'document' para capturar formulários estáticos (footer) e dinâmicos (post)
+document.addEventListener('submit', function(e) {
+    // Verifica se o elemento que disparou o evento tem a classe correta
+    if (e.target && e.target.classList.contains('newsletter-form')) {
+        e.preventDefault(); // PARE O ENVIO PADRÃO IMEDIATAMENTE
+        
+        const form = e.target;
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwe-qiCzQLCRUlfOkDBwTkUY35tfkmYygrQW5P7_9-dg62g1AZljiyzGBti9slxsdlQfQ/exec';
+        
+        // Elementos visuais (Busca dentro do container do formulário atual)
+        const btn = form.querySelector('button');
+        const originalBtn = btn.innerHTML;
+        const container = form.parentElement; // O pai (seja .footer-col ou .lead-box-pro)
+        
+        // Busca mensagens de feedback próximas
+        const successMsg = container.querySelector('.sheet-success');
+        const errorMsg = container.querySelector('.sheet-error');
+
+        // Feedback Visual (Loading)
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...'; 
+        btn.disabled = true;
+
+        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => {
+                form.reset();
+                if(successMsg) successMsg.style.display = 'block';
+                if(errorMsg) errorMsg.style.display = 'none';
+                
+                btn.innerHTML = '<i class="fas fa-check"></i> Enviado!';
+                
+                // Restaura o botão após 3 segundos
+                setTimeout(() => {
+                    btn.innerHTML = originalBtn;
+                    btn.disabled = false;
+                    if(successMsg) successMsg.style.display = 'none'; 
+                }, 4000);
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                if(errorMsg) errorMsg.style.display = 'block';
+                if(successMsg) successMsg.style.display = 'none';
+                
+                btn.innerHTML = 'Erro';
+                setTimeout(() => {
+                    btn.innerHTML = originalBtn;
+                    btn.disabled = false;
+                }, 3000);
+            });
+    }
+});
+
+/* --- PLAYER DE VÍDEO INTELIGENTE (Padrão Nativo) --- */
 document.addEventListener("DOMContentLoaded", function() {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzVSMVcdbNGLhVasOcTiiUUqiYeg52X1e0jfqkG7-9zX_sr1Jg435r1Hx4dD6AaubrFXg/exec';
-    const form = document.getElementById('google-sheet-form');
-    const successMsg = document.getElementById('sheet-success');
-    const errorMsg = document.getElementById('sheet-error');
+    const overlay = document.getElementById('videoOverlay');
+    const video = document.getElementById('heroVideo');
 
-    if (form) {
-        form.addEventListener('submit', e => {
-            e.preventDefault();
+    // Verifica se os elementos existem na página antes de rodar
+    if (overlay && video) {
+        
+        // --- 1. O GATILHO INICIAL (Apenas na Capa) ---
+        // Este evento só ocorre no primeiro clique sobre a capa/botão play.
+        overlay.addEventListener('click', function() {
+            // Efeito visual de sumir
+            overlay.style.transition = 'opacity 0.3s ease';
+            overlay.style.opacity = '0';
             
-            const btn = form.querySelector('button');
-            const originalBtn = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // Loading
-            btn.disabled = true;
+            // Remove a capa do caminho (display: none) após a transição
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                
+                // Inicia o vídeo e entrega o controle ao navegador
+                video.play();
+                video.controls = true; 
+            }, 300);
+        });
 
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    form.reset();
-                    successMsg.style.display = 'block';
-                    errorMsg.style.display = 'none';
-                    btn.innerHTML = originalBtn;
-                    btn.disabled = false;
-                    
-                    // Opcional: Sumir mensagem após 5s
-                    setTimeout(() => { successMsg.style.display = 'none'; }, 5000);
-                })
-                .catch(error => {
-                    console.error('Error!', error.message);
-                    errorMsg.style.display = 'block';
-                    successMsg.style.display = 'none';
-                    btn.innerHTML = originalBtn;
-                    btn.disabled = false;
-                });
+        // --- 2. RESET INTELIGENTE (Opcional) ---
+        // Quando o vídeo termina, volta a mostrar a capa bonita.
+        video.addEventListener('ended', function() {
+             video.controls = false; // Esconde os controles nativos
+             video.load(); // Recarrega o vídeo para o frame zero
+             overlay.style.display = 'flex'; // Traz a capa de volta
+             // Pequeno delay para garantir que o display:flex aplicou antes da opacidade
+             setTimeout(() => { overlay.style.opacity = '1'; }, 10);
         });
     }
 });
