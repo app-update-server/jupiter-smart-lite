@@ -510,23 +510,125 @@ footer {
     transform: translateY(-3px);
 }
 
-/* Newsletter Input */
-.footer-form { display: flex; gap: 10px; margin-top: 15px; }
-.footer-form input {
-    flex: 1; padding: 10px;
-    border-radius: 8px; border: 1px solid var(--border);
-    background: var(--bg-body); color: var(--text-main);
+/* --- CORREÇÃO DE FORMULÁRIO RESPONSIVO (NEWSLETTER & LEAD MAGNET) --- */
+
+/* Container do Formulário */
+.footer-form {
+    margin-top: 15px;
+    width: 100%;
 }
 
-/* Ajuste do formulário newsletter */
+/* O Grupo de Input + Botão */
 .footer-form .input-group {
     display: flex;
     gap: 10px;
+    width: 100%;
+    align-items: stretch; /* Garante que tenham a mesma altura */
 }
 
+/* O Campo de Texto */
+.footer-form input {
+    flex: 1; /* Ocupa todo o espaço disponível */
+    padding: 12px 15px; /* Aumentei para toque fácil */
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--bg-body);
+    color: var(--text-main);
+    font-size: 0.95rem;
+    min-width: 0; /* Evita estouro em flexbox */
+}
+
+/* O Botão de Enviar */
 .btn-footer {
-    background: var(--primary); color: white; border: none;
-    padding: 0 15px; border-radius: 8px; cursor: pointer;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    white-space: nowrap; /* Impede que o texto quebre (ex: PEGAR CUPOM) */
+    font-size: 0.9rem;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-footer:hover {
+    background: var(--primary-hover);
+}
+
+/* AJUSTE CRÍTICO PARA MOBILE (CORRIGE O BOTÃO CORTADO) */
+@media (max-width: 480px) {
+    /* Força quebra de linha em telas pequenas */
+    .footer-form .input-group {
+        flex-direction: column; /* Um embaixo do outro */
+        gap: 12px; /* Espaço entre input e botão */
+    }
+
+    .footer-form input {
+        width: 100%; /* Largura total */
+        text-align: center; /* Digitação centralizada fica elegante no mobile */
+    }
+
+    .btn-footer {
+        width: 100%; /* Botão largura total */
+        padding: 14px 0; /* Mais alto para dedo gordo */
+        font-size: 1rem; /* Texto maior */
+    }
+}
+
+/* --- ESTILO GARANTIDO DO LEAD BOX (CUPOM NO MEIO DO POST) --- */
+.lead-box-pro {
+    background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+    border: 2px dashed var(--primary);
+    border-radius: 16px;
+    padding: 30px 20px; /* Padding lateral menor para não espremer conteúdo */
+    margin: 40px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03); /* Sombra suave */
+}
+
+/* Garante leitura no Dark Mode */
+body.dark-mode .lead-box-pro {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Ícone flutuante */
+.lead-box-icon {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    display: block;
+    animation: floatIcon 3s infinite ease-in-out;
+}
+
+@keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.lead-box-title {
+    color: var(--text-title);
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.lead-box-desc {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Centraliza o formulário dentro do box */
+.lead-box-pro .footer-form {
+    max-width: 400px; /* Largura controlada */
+    margin: 0 auto;
 }
 
 /* Divisória e Rodapé Inferior */
