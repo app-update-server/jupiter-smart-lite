@@ -937,9 +937,28 @@ body.page-home .footer-grid {
 .article-body { font-size: 1.15rem; line-height: 1.8; color: var(--text-main); }
 .article-body h2 { margin-top: 40px; margin-bottom: 20px; color: var(--text-title); font-size: 1.8rem; }
 .article-body h3 { margin-top: 30px; margin-bottom: 15px; color: var(--text-title); font-size: 1.4rem; }
-.article-body p { margin-bottom: 20px; }
-.article-body ul { margin-bottom: 20px; padding-left: 20px; background: var(--bg-body); padding: 30px; border-radius: 8px; }
-.article-body li { margin-bottom: 10px; }
+.article-body p { 
+    margin-bottom: 20px; 
+}
+
+/* Lista com Box Cinza (Ajustado) */
+.article-body ul { 
+    margin-top: 0;          /* Remove margem extra do topo */
+    margin-bottom: 30px;    /* Espaço depois da lista */
+    background: var(--bg-body); 
+    padding: 20px 30px;     /* Reduzi de 30px para 20px no topo/baixo */
+    border-radius: 12px;    /* Arredondamento mais suave */
+    border: 1px solid var(--border); /* Borda sutil para acabamento */
+}
+
+.article-body li { 
+    margin-bottom: 10px; 
+    margin-left: 15px; /* Garante que a bolinha (bullet) não fique colada na borda */
+}
+/* Remove margem do último item para não sobrar espaço no fundo do box */
+.article-body li:last-child {
+    margin-bottom: 0;
+}
 
 /* --- LISTAS NUMERADAS TIPO TIMELINE (ELITE UI v2) --- */
 
