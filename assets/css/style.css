@@ -49,6 +49,7 @@ body {
     color: var(--text-main);
     line-height: 1.6;
     background-color: var(--bg-body);
+    overflow-x: hidden; /* Impede que o site role para os lados */
 }
 
 img {
@@ -2209,3 +2210,4 @@ body.dark-mode .share-copy:hover {
     color: var(--primary);     /* Texto fica azul no hover */
     transform: translateY(-2px);
 }
+
